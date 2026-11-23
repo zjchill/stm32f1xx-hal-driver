@@ -1,61 +1,79 @@
 ## 概述
 
-本仓库是 STMicroelectronics STM32CubeF1 的 HAL（硬件抽象层）与 LL（底层寄存器层）C 驱动库。它没有运行时的配置文件加载机制（无 YAML/TOML/env/properties 等），而是采用纯 **C 预处理器宏** 作为唯一的配置入口，全部在编译期生效。
+本仓库是 STMicroelectronics STM32CubeF1 包，为 F100/F101/F102/F103 xx6/xb/xe/xg/xc（含 xxx5c/xxx7c）MCU 提供完整的 CMSIS Core 与 Device 基础设施，以及对应的 HAL/LL C 驱动。配置入口仍然是 **纯 C 预处理器宏**（无 YAML/TOML/env/properties 等运行时加载机制），但在本次增量更新中，仓库从“仅包含 HAL/LL 代码”升级为同时携带 CMSIS Core/Device 完整实现。
 
 ## 核心机制
 
-### 1. 主配置入口：`stm32f1xx_hal_conf_template.h`
+### 1. HAL 层双配置文件
 
-该文件位于 `Inc/` 下，文档明确说明：
+#### `Inc/stm32f1xx_hal_conf_template.h`（模板文档）
+- 顶部注释明确声明："This file should be copied to the application folder and renamed to stm32f1xx_hal_conf.h"
+- 作为用户定制的起点，模块默认全部注释禁用（`/* #define HAL_<X>_MODULE_ENABLED */`），供应用按需启用
 
-> "This file should be copied to the application folder and renamed to stm32f1xx_hal_conf.h."
+#### `Inc/stm32f1xx_hal_conf.h`（新增——包内预设默认值）
+- 所有外设的 `HAL_MODULE_ENABLED` / `HAL_<X>_MODULE_ENABLED` **全部启用**（ADC、CAN、CEC、CORTEX、CRC、DAC、DMA、ETH、EXTI、FLASH、GPIO、HCD、I2C、I2S、IRDA、IWDG、NAND、NOR、PCCARD、PCD、PWR、RCC、RTC、SD、SMARTCARD、SPI、SRAM、TIM、UART、USART、WWDG、MMC）
+- 所有 `USE_HAL_<X>_REGISTER_CALLBACKS` **默认开启**（不再默认为 `0U`），允许调用方注册回调
+- 振荡器、系统参数、断言开关、以太网 PHY 等区块结构与模板一致，但处于可用状态
+- 新文件被 `stm32f1xx_hal_def.h` 直接 include；模板文件不参与正常构建流程，仅用于指导用户生成自定义版本
 
-应用工程应复制此模板为 `stm32f1xx_hal_conf.h`，并通过修改其中的 `#define` 来定制构建。顶层头文件 `Inc/stm32f1xx_hal.h` 通过 `#include "stm32f1xx_hal_conf.h"` 引入它，因此这是整个 HAL 配置树的根。
+这种“模板 + 包内默认”的双份结构，使现有应用继续使用覆盖的 `stm32f1xx_hal_conf.h`，而直接从库源码构建的工程获得全功能默认配置。
 
-配置分为若干逻辑区块（均以注释标题分隔）：
-- **模块选择**：`HAL_<PERIPHERAL>_MODULE_ENABLED`（如 `HAL_ADC_MODULE_ENABLED`、`HAL_UART_MODULE_ENABLED` 等），控制各外设驱动是否参与编译。
-- **振荡器值**：`HSE_VALUE`、`HSI_VALUE`、`LSI_VALUE`、`LSE_VALUE` 及其 `_STARTUP_TIMEOUT`，用于 RCC 时钟树计算；支持通过工具链编译器预处理器覆盖（见注释 "Tip: To avoid modifying this file... define the HSE value in your toolchain compiler preprocessor"）。
-- **系统配置**：`VDD_VALUE`、`TICK_INT_PRIORITY`、`USE_RTOS`、`PREFETCH_ENABLE`。
-- **回调启用开关**：`USE_HAL_<PERIPHERAL>_REGISTER_CALLBACKS`，默认全部为 `0U`，按外设逐一开启可选的回调注册能力。
-- **断言**：`USE_FULL_ASSERT` 控制 assert 宏展开。
-- **以太网 PHY 配置**：MAC 地址、缓冲区大小、DP83848 地址等。
+### 2. 芯片系列选择：`CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h`
 
-所有数值常量均使用 `#if !defined(...)` 包裹并提供默认值，允许外部覆盖。
+通过编译器预处理宏（如 `STM32F101x6`、`STM32F103xE`、`STM32F105xC`）展开为对应具体器件头：
 
-### 2. 公共定义与行为开关：`stm32f1xx_hal_def.h`
+| 系列 | 变体 |
+|---|---|
+| STM32F100 | stm32f100xb.h / stm32f100xe.h |
+| STM32F101 | stm32f101x6.h / stm32f101xb.h / stm32f101xe.h / stm32f101xg.h |
+| STM32F102 | stm32f102x6.h / stm32f102xb.h |
+| STM32F103 | stm32f103x6.h / stm32f103xb.h / stm32f103xe.h / stm32f103xg.h |
+| STM32F105/107 | stm32f105xc.h / stm32f107xc.h |
 
-该文件提供 HAL 通用的类型与宏，其中关键配置点：
-- `USE_RTOS` 被检查：当等于 `1U` 时直接触发 `#error "USE_RTOS should be 0 in the current HAL release"`，强制当前版本不支持 RTOS 集成。
-- `__HAL_LOCK` / `__HAL_UNLOCK` 宏在未启用 RTOS 时实现基于 handle->Lock 的简单互斥；若启用 RTOS，则预留扩展点。
-- 编译器差异化：针对 ARMCC V5/V6、GNU GCC、ICCARM 分别定义 `__weak`、`__packed`、`__ALIGN_BEGIN`、`__ALIGN_END`、`__RAM_FUNC`、`__NOINLINE` 等属性宏。
+每个具体头文件进一步导出 `__STM32F1XX_HAL` 与 `_STM32F1XX_` 家族宏，供 HAL/LL 源文件在内部进行条件编译。
 
-### 3. 包含顺序与依赖
+### 3. System/时钟配置入口
 
-```text
-stm32f1xx_hal.h → stm32f1xx_hal_conf.h ← 用户/工具链覆盖
-                ↓
-stm32f1xx_hal_def.h → stm32f1xx.h (芯片系列头) + Legacy/stm32_hal_legacy.h
+- `CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h` 声明 `SystemInit(void)`、`SystemCoreClockUpdate(void)`、全局变量 `SystemCoreClock` 及 AHB/APB 预分频表
+- 该头文件中 `SYS_CLK_FREQ` 宏用于 RCC 初始频率计算（配合外部工具链 `-D` 参数覆盖 HSE/HSI/LSE_VALUE）
+- 所有 OSC_*_VALUE 常量均以 `#if !defined(...)` 保护默认值，可在工具链命令行覆盖，无需修改模板
+
+### 4. CMSIS Core 与编译器适配
+
+| 组件 | 路径 | 作用 |
+|---|---|---|
+| Core API | `CMSIS/Core/Include/core_cm3.h` | Cortex-M3 内核寄存器访问、异常处理、Systick 等 |
+| 编译器分发 | `CMSIS/Core/Include/cmsis_compiler.h` | 按 ARMCLANG/GCC/ARMCC/IAR 分发到对应 `<cmsis_<compiler>.h>` |
+| GCC 适配 | `cmsis_gcc.h` | `__weak`、`__packed`、`__ALIGNED()`、`FORCE_INLINE` 等属性宏 |
+| ARM Compiler | `cmsis_armcc.h` | 同目标，针对 Keil MDK v5 (ARMCC) 和 v6 (armclang) |
+| IAR 适配 | `cmsis_iar.h` | IAR EWARM 对应属性映射 |
+| MPU | `mpu_armv7.h` | Cortex-M7/M3 MPU 抽象（M3 下为空壳） |
+
+`stm32f1xx_hal_def.h` 中的 `#if defined(__ICCARM__)` / `__GNUC__` / `__CC_ARM` / `__ARMCC_VERSION` / `__clang__` 分支选择编译器头，确保 `__weak`、`__packed`、`__RAM_FUNC`、`__NOINLINE` 在所有支持的工具链上一致。
+
+### 5. 包含顺序与依赖拓扑
+
+```
+C 源文件
+→ stm32f1xx_hal.h
+→ stm32f1xx_hal_conf.h（包内默认）← 可被用户 stm32f1xx_hal_conf.h 覆盖
+→ stm32f1xx_hal_def.h
+→ CMSIS/Device/.../stm32f1xx.h → stm32f103xe.h（示例）→ system_stm32f1xx.h
+→ CMSIS/Core/Include/cmsis_compiler.h → cmsis_gcc.h / cmsis_armcc.h / ...
 ```
 
-所有 HAL 源文件通过统一入口 `stm32f1xx_hal.h` 间接获得配置，保证编译期宏的一致性。
+HAL/LL 源文件不直接 include 芯片头或 CMSIS Core，而是统一通过 `stm32f1xx_hal.h` 间接引入，保证所有模块看到同一组配置宏。
 
-### 4. 运行时零开销
+### 6. 运行时零开销
 
-由于所有配置都是 `#define` 宏，未启用的模块代码会被预处理器彻底裁剪掉，不产生任何运行时开销。不存在配置解析函数、配置文件读取路径或运行时特征探测。
+所有行为由 `#define` 宏决定：未启用的模块代码被预处理器彻底裁剪，不产生任何运行时解析开销。不存在配置文件读取函数、环境变量枚举或运行时特性探测。
 
 ## 约定与约束
 
-- **模板必须复制到应用目录并重命名为 `stm32f1xx_hal_conf.h`**——由 `stm32f1xx_hal_conf_template.h` 顶部注释明确要求，且 `stm32f1xx_hal.h` 只 include 该文件名。
-- **当前 HAL 版本禁止启用 RTOS**——`stm32f1xx_hal_def.h` 中 `USE_RTOS == 1U` 会触发编译期 `#error`。
-- **每类外设对应独立的 ENABLED/CALLBACKS 宏对**——`HAL_<X>_MODULE_ENABLED` 控制编译，`USE_HAL_<X>_REGISTER_CALLBACKS` 控制回调接口生成，二者独立。
-- **振荡器频率默认值通过 `#if !defined(...)` 保护**——可在工具链编译器命令行通过 `-DHSE_VALUE=...` 等方式覆盖，无需修改模板。
-- **断言功能默认关闭**——`USE_FULL_ASSERT` 默认注释掉，需显式取消注释以启用。
-- **LL 层（`stm32f1xx_ll_*.h`）不经过 HAL 配置层**，直接暴露寄存器级 API，不受 `HAL_*_MODULE_ENABLED` 控制。
-
-## 关键文件
-
-- `Inc/stm32f1xx_hal_conf_template.h` — HAL 配置模板（模块开关、时钟、系统参数、回调开关、以太网配置）
-- `Inc/stm32f1xx_hal.h` — HAL 总入口，唯一 include `stm32f1xx_hal_conf.h`
-- `Inc/stm32f1xx_hal_def.h` — HAL 公共类型、锁宏、编译器属性宏、RTOS 限制
-- `Src/stm32f1xx_hal.c` — HAL 初始化入口，消费上述配置宏
-- `Inc/Legacy/stm32_hal_legacy.h` — 旧版 HAL 兼容宏
+- **模板复制到应用目录并重命名为 `stm32f1xx_hal_conf.h`**——由 `stm32f1xx_hal_conf_template.h` 顶部注释明确要求；`stm32f1xx_hal_conf.h` 是包内置入的版本，`stm32f1xx_hal_conf_template.h` 仅供编辑参考。
+- **当前 HAL 版本禁止启用 RTOS**——`stm32f1xx_hal_def.h` 中 `USE_RTOS == 1U` 触发 `#error "USE_RTOS should be 0 in the current HAL release"`。
+- **模块控制宏对独立存在**——`HAL_<X>_MODULE_ENABLED` 控制编译，`USE_HAL_<X>_REGISTER_CALLBACKS` 控制回调接口生成，二者互不影响。
+- **OSC_*_VALUE 常量可通过 `-D` 覆盖**——模板使用 `#if !defined(HSE_VALUE)` 包裹默认值，遵循工具链命令行的优先级覆盖规则。
+- **断言功能默认关闭**——模板中 `USE_FULL_ASSERT` 默认注释掉，需显式取消注释以启用。
+- **LL 层不经过 HAL 配置层**——`stm32f1xx_ll_*.h` 直接暴露寄存器级 API，不受 `HAL_*_MODULE_ENABLED` 控制。
+- **编译期必须定义一个 `STM32F10X_...` 系列宏**——`stm32f1xx.h` 用 `#ifndef __STM32F1XX_HAL` 校验，若未定义会触发 `#error "Please select first the target STM32F1xx device used in your application"`（该错误位于 stm32f1xx.h 本身）。

@@ -1,30 +1,45 @@
 ## 总体结论
 
-本仓库 **没有提供任何原生构建系统**——不存在 Makefile、CMakeLists.txt、Dockerfile、build*.sh、CI workflow、版本自动标记脚本或打包器。该目录本质上是 STM32CubeF1 HAL / LL 驱动的 **C 头文件与 .c 实现源文件的静态归档**，以“被集成方负责编译/链接”的方式发布。
+本仓库 **仍然不提供任何原生构建脚本或制品**——不存在 Makefile、CMakeLists.txt、Dockerfile、build*.sh、CI workflow、打包器。它发布为一份可被集成到任意工程中的 C/C++ 源码归档，由用户工程的工具链自行编译、链接。
 
-## 仓库作为库包的形态
+本轮新增的 CMSIS Core / CMSIS-Device 头文件与根级 `Inc/stm32f1xx_hal_conf.h` 改变了“源码内容”而非“构建机制”，仍沿用 STM32Cube 组件的被集成方负责构建模式。
 
-- 代码按 `Inc/`（全部公开头文件）与 `Src/`（对应 .c 实现 + `stm32f1xx_hal_msp_template.c`、`stm32f1xx_hal_timebase_*.template.c` 等模板文件）的物理布局组织，遵循 STM32Cube 组件的目录约定。用户需在自己的工程（Makefile、IAR、Keil、STM32CubeIDE、OpenOCD+GDB 工具链等）中将这些路径加入 include/search 路径并参与链接。
-- 每个外设模块（ADC/CAN/I2C/SPI/TIM/USART/PWR/RCC/Flash/…）都拥有独立的 `stm32f1xx_hal_<periph>.h/.c` 对，LL 层则以独立 `stm32f1xx_ll_<periph>.h/.c` 提供，属于接口层面的组织约定，而非构建约束。
-- `Inc/stm32f1xx_hal_conf_template.h` 与 `stm32_assert_template.h` 是提供给用户的配置入口（复制后重命名为 `stm32f1xx_hal_conf.h` 才能启用），这构成唯一的“可定制性点”。
+## 源码组成三层结构
 
-## 版本与发布流程依据 README
+| 层级 | 位置 | 角色 |
+|------|------|------|
+| HAL 层 | `Src/stm32f1xx_hal_*.c` + `Inc/stm32f1xx_hal_*.h` | 外设 API 实现与公开接口 |
+| LL 层 | `Src/stm32f1xx_ll_*.c/.h` | 低层寄存器直接访问（可选） |
+| CMSIS 基础设施 | `CMSIS/Core/Include/` + `CMSIS/Device/ST/STM32F1xx/Include/` | ARM Cortex-M3 核心适配、编译器抽象 (`cmsis_compiler.h`, `cmsis_gcc.h`, `cmsis_armclang.h`, `cmsis_armcc.h`)、全部 F100/F101/F102/F103 xx6/xb/xe/xg 及 F105xc/F107xc 器件定义 (`stm32f1xx.h` → `system_stm32f1xx.h` → `stm32f10x_x[6,b,e,g,c].h`) |
 
-- README.md 中的兼容性表格声明了 **HAL Driver F1 / CMSIS Device F1 / CMSIS Core** 三者必须保持严格一致版本，例如 v1.1.4 对应 CMSIS-Device v4.3.1 与 CMSIS-Core v5.4.0_cm3。
-- README 还明确说明该项目是 STM32CubeF1 MCU Package 的拆分产物之一："The monolithic MCU Package ... The MCU component: each STM32Cube software module being part of the STM32Cube MCU package, is delivered as an individual repository"。因此本仓库只承载单个组件的源代码，完整包位于上游 `STMicroelectronics/STM32CubeF1`。
-- GitHub Releases 页面对接 `.github` 之外的 Git tag；README 引用 badge 显示 `STMicroelectronics/stm32f1xx_hal_driver.svg?color=brightgreen`，即通过 GitHub Tag (vX.Y.Z) 体现版本号。
+用户工程需把 `Inc/` 和 `CMSIS/` 都加入 include/search path；HAL 头通过 `stm32f1xx_hal_conf.h` 选择具体模块。
 
-## 与外部项目的集成约定
+## 可配置性入口
 
-1. 把 `Inc/` 放入工程 Include Path，把 `Src/*.c` 加入工程源文件列表；需要低延迟/裸机访问时使用 `LL_*` 头。
-2. 从 `stm32f1xx_hal_conf_template.h` 拷贝出用户配置文件 `stm32f1xx_hal_conf.h`，并根据目标芯片与启用功能修改其中的宏开关。
-3. 将 `stm32f1xx_hal_msp_template.c`、`stm32f1xx_hal_timebase_tim_template.c`、`stm32f1xx_hal_timebase_rtc_alarm_template.c` 复制到应用工程并重命名（去掉 `_template`），按需实现回调。
-4. 与同版本的 CMSIS Core + CMSIS-Device 一起使用；不兼容将产生编译期宏/类型冲突（由 README 明确列出强制对应关系）。
+- `Inc/stm32f1xx_hal_conf.h`：当前仓库中已包含完整版本（非模板），所有 `HAL_XXX_MODULE_ENABLED` 宏均已启用；该文件默认启用 ADC、CAN、CEC、Cortex、CRC、DAC、DMA、ETH、EXTI、FLASH、GPIO、HCD、I2C、I2S、IRDA、IWDG、NAND、NOR、PCCARD、PCD、PWR、RCC、RTC、SD、SMARTCARD、SPI、SRAM、TIM、UART、USART、WWDG、MMC，并设置 `HSE_VALUE=8MHz`、`HSI_VALUE=8MHz`、`LSE_VALUE=32768Hz`、`USE_RTOS=0`、全部回调注册关闭等。
+- `Inc/stm32f1xx_hal_conf_template.h`：用户拷贝复制版，注释掉默认模块以裁剪体积。
+- `Inc/stm2_assert_template.h`：启用 `USE_FULL_ASSERT` 后提供断言检查。
+- `Src/stm32f1xx_hal_msp_template.c`、`Src/stm32f1xx_hal_timebase_tim_template.c`、`Src/stm32f1xx_hal_timebase_rtc_alarm_template.c`：应用工程需复制并重命名后实现硬件相关钩子。
 
-## 已验证的缺失项
+## 版本与兼容性约束
 
-- 根目录及子树搜索均无 `Makefile*`、`*.mk`、`CMakeLists.txt`、`*.cmake`、`Dockerfile*`、`Vagrantfile`、`package.json`、`setup.py`、`pyproject.toml`。
-- `.github/ISSUE_TEMPLATE` 存在，但 `.github/workflows/` 为空或不存在，未见 CI lint/build/release pipeline。
-- 未发现 `.github/release.yml`、`.travis.yml`、`.circleci/`、`appveyor.yml`、`Jenkinsfile`、`renovate.json`、`version.sh` 等自动化制品。
+- README.md 强制要求三件套一致性：`HAL Driver F1 : CMSIS Device F1 : CMSIS Core`。
+- 最新记录（README 表头三行即 v1.1.4→v1.1.8）对应 CMSIS-Device v4.3.x 与 CMSIS-Core v5.4.0_cm3。
+- 版本号通过 Git Tag (如 `v1.1.8`) 与 GitHub Releases badge (`https://img.shields.io/github/v/tag/…/stmcuf1xx_hal_driver.svg?color=brightgreen`) 体现。
+- CMSIS Core/Device 作为内联的头文件随仓库分发，避免上游版本漂移导致的 ABI/符号不匹配。
 
-综上，本仓库在“构建系统”这一范畴内是一个无自身的纯源码分发体，其角色是把 HAL/LL C 源码交付给用户工程中自行编译，版本一致性由 README 内的三件套对应表以及 Git Tag 约束。
+## 外部集成方式
+
+1. 在用户工程中把 `Inc/`、`CMSIS/Core/Include/`、`CMSIS/Device/ST/STM32F1xx/Include/` 加入预处理器搜索路径。
+2. 使用目标编译器（ARM Compiler / clang / GCC，见 `cmsis_compiler.h`、`cmsis_gcc.h`、`cmsis_armclang.h`、`cmsis_armcc.h`）选择相应 `-mcpu=cortex-m3`、`-march=armv7-m` 等交叉编译选项。
+3. 将 `Src/*.c` 加入源文件列表并参与链接；若仅需裸机低层访问则只包含 `stm32f1xx_ll_*.h`。
+4. 按需修改 `stm32f1xx_hal_conf.h` 中的 `HAL_XXX_MODULE_ENABLED` 与 oscillator 频率。
+5. 与同版本的 CMSIS Core v5.x 与 CMSIS-Device F1 v4.x 一起使用；不满足 README 对应关系会产生编译期宏/类型冲突（由 README 明确列出强制对应关系）。
+
+## 缺失项（确认不变）
+
+- 根目录及子树无 `Makefile*`、`*.mk`、`CMakeLists.txt`、`*.cmake`、`Dockerfile*`、`Vagrantfile`、`package.json`、`setup.py`、`pyproject.toml`。
+- `.github/workflows/` 为空/不存在，无 CI lint/build/release pipeline。
+- 未发现 `.github/release.yml`、`.travis.yml`、`.circleci/`、`appveyor.yml`、`Jenkinsfile`、`renovate.json`、`version.sh`。
+
+综上，本仓库在“构建系统”范畴仍是 **零构建脚本、以源码交付** 的模式；新增的 CMSIS Core/Device 与 `stm32f1xx_hal_conf.h` 属于被集成方所需的基础设施头文件集合，不是新的自动化构建体系。
