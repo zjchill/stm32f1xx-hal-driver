@@ -31,6 +31,9 @@ kk_cards:
     unique_setup_and_commands:
         id: d1e25cf7-2ddc-4cb9-8431-ade783798779
         title: STM32F1xx HAL/LL 外设驱动库
+    build_system:
+        id: 8497b03b-66f3-44b6-87f5-08fe395e3b4d
+        title: 构建系统：无原生构建脚本的纯源码发布分发模式
     configuration_system:
         id: c5a94270-907d-40f8-9856-39f95f86406d
         title: STM32 HAL/LL 配置体系：编译期宏开关与模板化头文件
@@ -38,5 +41,6 @@ kk_cards:
         id: 7d7dafa2-da8c-4a69-a5a9-f565c2fa1746
         title: STM32 HAL/LL 错误处理：HAL_StatusTypeDef 返回值 + assert_param 参数校验
 kk_repo_cards:
+    - build_system
     - configuration_system
     - error_handling

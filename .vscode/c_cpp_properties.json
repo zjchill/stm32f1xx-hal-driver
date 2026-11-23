@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "name": "STM32F1",
+      "includePath": [
+        "${workspaceFolder}/Inc",
+        "${workspaceFolder}/CMSIS/Device/ST/STM32F1xx/Include",
+        "${workspaceFolder}/CMSIS/Core/Include"
+      ],
+      "defines": [
+        "USE_HAL_DRIVER",
+        "STM32F103xB"
+      ],
+      "compilerPath": "C:/Users/25872/tools/arm-gnu-toolchain-15.3.rel1-mingw-w64-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++11",
+      "intelliSenseMode": "windows-gcc-arm"
+    }
+  ],
+  "version": 4
+}
