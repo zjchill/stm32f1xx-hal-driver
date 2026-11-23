@@ -1,0 +1,42 @@
+schema_version: 1
+module_path: root
+title: STM32F1xx HAL/LL 外设驱动库
+scope:
+    - Inc/
+    - Src/
+    - _htmresc/
+    - .github/
+    - README.md
+    - CONTRIBUTING.md
+    - CODE_OF_CONDUCT.md
+    - SECURITY.md
+    - Release_Notes.html
+source_files: []
+depends_on: []
+related_to: []
+kk_module_id: 84644d4c-2794-4fba-83bc-88b6a67fface
+kk_cards:
+    architecture_design:
+        id: af7d68b1-e82f-4d77-9103-01ee4e420968
+        title: STM32F1xx HAL/LL 外设驱动库
+    coding_conventions:
+        id: e3d1ae07-08b5-439c-87ab-3a4fb2a84fb5
+        title: STM32F1xx HAL/LL 外设驱动库
+    overview:
+        id: 9599b908-5c98-4236-8114-52b27c005fa7
+        title: STM32F1xx HAL/LL 外设驱动库
+    tech_stack:
+        id: 9611d5a1-1a74-4467-bad3-11d7db72d5f1
+        title: STM32F1xx HAL/LL 外设驱动库
+    unique_setup_and_commands:
+        id: d1e25cf7-2ddc-4cb9-8431-ade783798779
+        title: STM32F1xx HAL/LL 外设驱动库
+    configuration_system:
+        id: c5a94270-907d-40f8-9856-39f95f86406d
+        title: STM32 HAL/LL 配置体系：编译期宏开关与模板化头文件
+    error_handling:
+        id: 7d7dafa2-da8c-4a69-a5a9-f565c2fa1746
+        title: STM32 HAL/LL 错误处理：HAL_StatusTypeDef 返回值 + assert_param 参数校验
+kk_repo_cards:
+    - configuration_system
+    - error_handling
