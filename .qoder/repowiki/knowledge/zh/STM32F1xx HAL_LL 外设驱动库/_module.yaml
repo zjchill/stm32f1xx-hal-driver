@@ -33,7 +33,7 @@ kk_cards:
         title: STM32F1xx HAL/LL 外设驱动库
     build_system:
         id: 8497b03b-66f3-44b6-87f5-08fe395e3b4d
-        title: 构建系统：纯源码分发（含 CMSIS Core/Device 与 HAL 配置头）
+        title: 构建系统：零脚本、纯源码分发（含 CMSIS Core/Device）
     configuration_system:
         id: c5a94270-907d-40f8-9856-39f95f86406d
         title: STM32CubeF1 配置体系：编译期宏、CMSIS Core/Device 头与 HAL 模板

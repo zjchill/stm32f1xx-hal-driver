@@ -5,10 +5,10 @@
     "progress_status": "completed",
     "wiki_present_status": "COMPLETED",
     "recovery_checkpoint": "wiki_generation_completed",
-    "last_commit_id": "503be2ad6fb9e3b2aff6173f109d4f83ebdba15c",
-    "last_commit_update": "2026-11-23T08:58:22Z",
-    "gmt_create": "2026-11-23T08:58:22Z",
-    "gmt_modified": "2026-11-23T08:58:22Z",
+    "last_commit_id": "5c9134ee6a71c9cac8517bc5ce28a376a43e0644",
+    "last_commit_update": "2026-11-23T09:56:32Z",
+    "gmt_create": "2026-11-23T09:56:32Z",
+    "gmt_modified": "2026-11-23T09:56:32Z",
     "extend_info": "{\"language\":\"zh\",\"active\":true,\"branch\":\"master\"}"
   },
   "wiki_catalogs": [
@@ -20,8 +20,8 @@
       "prompt": "为 STM32F1xx HAL 的 TIM 定时器子系统创建详细文档。重点解释基本定时器、通用定时器与高级定时器的架构差异，以及 TIMx_CR1、TIMx_PSC、TIMx_ARR、TIMx_CCR、TIMx_DIER、TIMx_BDTR 等关键寄存器在 HAL 中的封装方式。详细说明初始化结构体 TIM_TimeBaseInitTypeDef 和 TIM_OC_InitTypeDef/TIM_IC_InitTypeDef/TIM_Encoder_InitTypeDef/TIM_HallSensor_InitTypeDef/TIM_MasterConfigTypeDef/TIM_SlaveConfigTypeDef 的成员含义与配置步骤。覆盖以下功能：基本计数模式、中断与 DMA 触发、PWM 输出（单端/互补）、输入捕获、编码器接口、霍尔传感器模式、主从模式、事件调度、重复计数器、死区控制、刹车功能、多通道同步输出。结合 stm32f1xx_hal_tim.c 与 stm32f1xx_hal_tim_ex.c 给出完整代码示例，包括 HAL_TIM_Base_Init、HAL_TIM_PWM_ConfigChannel、HAL_TIM_IC_ConfigChannel、HAL_TIM_Encoder_Config、HAL_TIMEx_Complementary_PWM_ConfigChannel、HAL_TIMEx_ConfigBreakDeadTime、HAL_TIM_IRQHandler、HAL_TIM_PeriodElapsedCallback、HAL_TIM_PWM_PulseFinishedCallback、HAL_TIM_IC_CaptureCallback 等典型调用路径。说明 TIM 时钟源选择、预分频与自动重装载关系、更新中断与比较中断优先级、溢出处理、抖动来源、DMA 传输边界条件、低功耗下的行为限制，以及在 Cortex-M3 上的实时性注意事项。提供常见故障排查：无法产生 PWM、捕获值异常、编码器方向错误、互补通道冲突、刹车误触发、中断丢失、DMA 半满/满中断处理等。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_tim.h,Src/stm32f1xx_hal_tim.c,Inc/stm32f1xx_hal_tim_ex.h,Src/stm32f1xx_hal_tim_ex.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "a3d9a74e-ce5f-4c65-8d70-18626badd572",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -39,8 +39,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的 HAL → LL → 寄存器三层架构创建架构文档。解释 HAL 层如何封装外设状态机、超时控制与回调机制，向应用提供可移植 API；LL（Low Layer）层如何暴露直接操作寄存器的轻量接口，用于高性能或极小代码体积场景；最底层 CMSIS Device 寄存器定义如何被两者共同依赖。通过 I2C、SPI、USART 等典型外设说明调用链：应用调用 HAL_xxx_Transmit → HAL 检查句柄与状态 → 设置 DMA/中断 → 调用 __HAL_LL_* 宏或 LL_* 函数 → 触发外设中断/DMA 完成标志 → 回调通知应用。对比 HAL 与 LL 在函数开销、ROM/RAM 占用、可移植性方面的权衡，并给出何时选择 HAL、何时下探到 LL 的决策指南。包含架构图和数据流图，以及常见误区（例如误用 LL 导致句柄状态不一致）。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal.h,Inc/stm32f1xx_hal_def.h,Src/stm32f1xx_hal.c,Inc/stm32f1xx_ll_bus.h,Inc/stm32f1xx_ll_gpio.h,Inc/stm32f1xx_ll_i2c.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "2d19a001-c697-49b7-ba3e-71a3f85cdbf1",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -60,8 +60,8 @@
       "prompt": "为 STM32F1xx HAL ADC 模块创建完整的 API 与实现参考文档。首先解释 ADC 在 STM32F1 中的整体架构：时钟树、基准电压、输入通道映射、规则组与注入组的关系，以及 HAL 句柄 `ADC_HandleTypeDef` 和扩展配置结构体的字段含义。然后按使用难度组织内容：从单通道单次采样开始，逐步覆盖多通道扫描模式、外部触发源（定时器/EXTI）、连续/单次转换、分辨率与采样时间配置、DMA 传输、中断回调、校准流程、基准电压选择与输入阻抗注意事项。对每个主要接口（如 `HAL_ADC_Init`、`HAL_ADC_ConfigChannel`、`HAL_ADC_Start`、`HAL_ADC_PollForConversion`、`HAL_ADC_Start_IT`、`HAL_ADC_Start_DMA`、`HAL_ADC_Stop`、`HAL_ADC_IRQHandler`、`HAL_ADC_ConvCpltCallback` 等）给出参数说明、返回值、状态码、典型调用序列和错误处理建议。结合 stm32f1xx_hal_adc[_ex].h/.c 展示完整示例代码，包括 GPIO/时钟初始化、ADC MSP 钩子、DMA 初始化、采集循环与结果换算。讨论精度、吞吐率、噪声抑制、采样时间权衡和校准方法，并补充常见调试问题（读数异常、通道串扰、DMA 地址错位、超时、中断丢失）。最后提供从 HAL 切换到 LL 接口的迁移要点，引用 stm32f1xx_ll_adc.h/.c 中的关键寄存器操作函数。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_adc.h,Src/stm32f1xx_hal_adc.c,Inc/stm32f1xx_hal_adc_ex.h,Src/stm32f1xx_hal_adc_ex.c,Inc/stm32f1xx_ll_adc.h,Src/stm32f1xx_ll_adc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "af2130d4-175f-44e9-821a-cfbc4ccf36fa",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -81,8 +81,8 @@
       "prompt": "为 STM32F1xx HAL 的 Flash 存储器子系统创建详细文档。说明 stm32f1xx_hal_flash[_ex].h/.c 暴露的 Flash HAL API，包括页擦除、半字/字编程、选项字节读取与修改、写保护配置、解锁/上锁流程、中断标志查询和错误码处理。结合 STM32F1 系列 Flash 的架构特性，解释程序存储器与数据存储器的地址映射、页大小、块大小、编程时序、等待状态、VDD 工作范围与掉电安全要求。给出典型应用场景的代码示例：固件升级中的双区备份、参数区持久化、启动扇区保护、运行时数据写入与回滚策略。讨论 Flash 磨损、可靠性、功耗、延迟与总线带宽优化，并列出常见故障（如未解锁、写保护冲突、电压不足、校验失败）的诊断方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_flash.h,Src/stm32f1xx_hal_flash.c,Inc/stm32f1xx_hal_flash_ex.h,Src/stm32f1xx_hal_flash_ex.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "0d2d1617-6010-4fcb-b306-32abe3522d47",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -100,8 +100,8 @@
       "prompt": "为 STM32F1xx HAL USB 设备端（PCD，Peripheral Controller Device）创建详细文档。重点说明 PCD 初始化、枚举流程、端点配置、控制/批量/中断/等时传输、挂起与唤醒、DMA 集成以及事件回调机制。结合 stm32f1xx_hal_pcd.h/.c 和 stm32f1xx_hal_pcd_ex.h/.c，解释 PCDCfgTypeDef、PCD_HandleTypeDef、端点句柄和设备描述符的关系，并给出最小示例：实现一个自定义 USB 设备、注册端点、处理控制请求、通过 Bulk 或 Interrupt 端点收发数据，并在 HAL_PCD_DataInStageCallback / HAL_PCD_SetupStageCallback / HAL_PCD_SuspendCallback / HAL_PCD_ResumeCallback 中完成状态管理。讨论 USB 总线供电、Vbus 检测、带宽限制、最大包长、EP0 行为、STALL/NYET 状态、挂起恢复、时钟源和外挂 PHY 的限制。提供常见问题的排查方法，包括枚举失败、设备被重置、端点忙、DMA 地址未对齐、USB_OTG_FS 中断优先级不足、复位后状态不一致等。如需，补充从 HAL_PCD_* 迁移到 LL_USB 接口的对照表和性能注意事项。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_pcd.h,Src/stm32f1xx_hal_pcd.c,Inc/stm32f1xx_hal_pcd_ex.h,Src/stm32f1xx_hal_pcd_ex.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "10dcd435-1062-4a06-8022-78add5f47b1a",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -119,8 +119,8 @@
       "prompt": "为 STM32F1xx HAL 的 I2C 接口创建详细文档。解释 I2C_HandleTypeDef 句柄结构体、I2C_InitTypeDef 配置项（时钟速度、地址模式、双地址模式、ACK/NAK、General Call）以及 MSP 钩子中 GPIO 与中断/DMA 的配置方式。覆盖主机发送/接收、从机发送/接收、多主机仲裁、重复起始条件、NACK 检测与总线错误处理。说明同步（轮询）、异步（中断）和 DMA 三种传输路径，包括 HAL_I2C_Master_Transmit/Receive、HAL_I2C_Slave_Transmit/Receive、HAL_I2C_IsDeviceReady、HAL_I2C_Mem_Write/Read 等关键函数。给出典型用例：写寄存器读取传感器数据、连续读 EEPROM、从机应答设备。讨论 I2C 时序、时钟拉伸、SCL/SDA 上升时间、时钟频率限制、总线竞争、超时参数与常见调试方法（逻辑分析仪、错误码）。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_i2c.h,Src/stm32f1xx_hal_i2c.c,Inc/stm32f1xx_ll_i2c.h,Src/stm32f1xx_ll_i2c.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -138,8 +138,8 @@
       "prompt": "为 STM32F1xx HAL 的 GPIO 与 EXTI 外部中断创建详细文档。解释 GPIO 初始化结构体、引脚模式（输入、输出、复用、模拟）、输出类型（推挽、开漏）、上下拉电阻、速度配置，以及 `HAL_GPIO_Init`、`HAL_GPIO_WritePin`、`HAL_GPIO_ReadPin`、`HAL_GPIO_TogglePin` 等接口的用法；说明 EXTI 中断线的映射规则、触发边沿（上升/下降/双边沿）配置、中断优先级和回调机制 `HAL_GPIO_EXTI_Callback`。结合 stm32f1xx_hal_gpio.{h,c} 与 stm32f1xx_hal_exti.{h,c} 给出最小可用示例：按键检测驱动 LED、按键中断切换状态。讨论引脚复用冲突、浮空输入噪声、中断延迟、唤醒路径和调试冻结对 GPIO/EXTI 的影响，并说明它们如何作为其他外设的底层信号入口。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_gpio.h,Src/stm32f1xx_hal_gpio.c,Inc/stm32f1xx_hal_gpio_ex.h,Src/stm32f1xx_hal_gpio_ex.c,Inc/stm32f1xx_hal_exti.h,Src/stm32f1xx_hal_exti.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "e460944e-49a3-47bb-a327-e591ebabff7b",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -159,8 +159,8 @@
       "prompt": "为 STM32F1xx HAL Driver 项目创建全面的概述与快速开始文档。解释该驱动库在 STM32CubeF1 生态系统中的定位，说明 HAL-LL 分层架构的设计动机与价值。介绍 STM32F1 系列 MCU 的硬件特性范围，以及本仓库作为独立组件（MCU component）与完整 STM32CubeF1 包的关系。提供清晰的版本兼容性矩阵（HAL Driver F1 / CMSIS Device F1 / CMSIS Core），并给出从下载、集成到首次运行的最小示例。面向初学者解释 HAL 与 LL 的区别、句柄（Handle）概念、MSP 钩子的作用；面向有经验的开发者简要说明模块裁剪、Tick 机制、错误处理等核心机制。包含常见集成问题与故障排除提示。",
       "progress_status": "completed",
       "dependent_files": "README.md,Inc/stm32f1xx_hal.h,Src/stm32f1xx_hal.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "kk_dependent_files": [
         "README.md",
         "Inc/stm32f1xx_hal.h",
@@ -175,8 +175,8 @@
       "prompt": "为 STM32F1xx LL（Low Layer）低层驱动创建架构与迁移指南。解释 LL 接口直接封装 CMSIS Device 寄存器操作的设计目标，说明其与 HAL 分层的关系：HAL 面向可移植性和易用性，LL 面向性能、精确时序和最小代码体积。对比两者在函数数量、执行开销、ROM/RAM 占用、中断/DMA 抽象程度方面的差异，给出选择 HAL 还是 LL 的决策矩阵。描述 LL 命名约定（如 __HAL_xxx_PERIPH_ENABLE_CLOCK、__HAL_GPIO_PIN_MASK、__HAL_TIM_SET_COUNTER）、常用宏分类（时钟、GPIO、外设控制、状态检查）以及典型调用流程。提供从 HAL_UART_Transmit 到 LL_USART_SendData/WaitUntilFlagSet 的最小迁移示例，并强调 LL 代码在不同 STM3F1 子型号间可能存在的寄存器差异风险。包含性能分析方法（使用编译器优化等级、查看 map 文件、统计中断延迟）和调试建议（SysTick、ITM、SWO）。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_def.h,Inc/stm32f1xx_ll_bus.h,Src/stm32f1xx_ll_bus.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "kk_dependent_files": [
@@ -193,8 +193,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的核心架构创建架构文档。重点阐述 HAL → LL → 寄存器 三层分离设计，说明 HAL 层如何屏蔽 STM32F1 内部寄存器差异并提供可移植 API，LL 层如何暴露底层高性能接口。详细解释公共类型定义（HAL_StatusTypeDef、HAL_LockTypeDef）、句柄模型、回调机制、状态机模式、MSP（MCU Specific Peripheral）钩子扩展点。说明 stm32f1xx_hal_conf_template.h 中的模块裁剪宏、时钟/振荡器配置断言机制的作用方式。结合 stm32f1xx_hal.c 中的 HAL_Init、HAL_GetTick、HAL_Delay、HAL_IncTick 等核心函数，描述系统生命周期与 Tick 时基流程。提供从应用调用到外设中断/DMA 完成再到回调返回的完整数据流图，并讨论性能权衡、线程安全注意事项和调试建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_def.h,Inc/stm32f1xx_hal_conf_template.h,Inc/stm32_assert_template.h,Src/stm32f1xx_hal.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 1,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_def.h",
@@ -211,8 +211,8 @@
       "prompt": "为 STM32F1xx HAL USB 主机端（HCD，Host Controller Driver）创建详细文档。重点说明 HCD 初始化、USB 主机控制器启动、设备连接/断开检测、总线枚举、端点发现、数据传输、挂起恢复和错误恢复。结合 stm32f1xx_hal_hcd.h/.c，解释 HCD_HandleTypeDef、HCD_ConfigTypeDef、端点描述符、速度识别和主机生命周期，并给出最小示例：初始化 HCD、在 HAL_HCD_ConnectCallback / HAL_HCD_DisconnectCallback / HAL_HCD_HC_NotifyURBChangeCallback 中处理设备插拔，然后调用上层 USB 主机栈或直接访问端点进行数据收发。讨论 OTG_FS 主机模式、VBUS 驱动、过流保护、端口电源、带宽分配、高速/全速设备兼容性、MTU/最大包长、DMA 使用和中断优先级设置。提供连接失败、设备无法枚举、间歇性断开、端点 NAK/TIMEOUT、主机复位循环和调试日志分析等常见问题的排查思路。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_hcd.h,Src/stm32f1xx_hal_hcd.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "10dcd435-1062-4a06-8022-78add5f47b1a",
       "layer_level": 1,
       "order": 1,
@@ -229,8 +229,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的公共类型、句柄与状态模型创建详细文档。重点说明 stm32f1xx_hal_def.h 中定义的 HAL_StatusTypeDef、HAL_LockTypeDef、__IO 修饰符、NULL 兼容宏等基础类型的作用；解释每个外设句柄结构体（如 GPIO_InitTypeDef、I2C_HandleTypeDef、UART_HandleTypeDef、TIM_HandleTypeDef）的字段含义、初始化顺序和生命周期。详细说明 HAL_OK、HAL_ERROR、HAL_BUSY、HAL_TIMEOUT 等状态码的使用约定，以及 HAL_GetState / HAL_SetState 的状态机流转。结合 GPIO、I2C、UART、TIM 的实际句柄结构，给出初始化、使用、禁用和错误恢复的代码示例。讨论多线程/RTOS 环境下句柄共享、互斥锁、重入风险和调试方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_def.h,Inc/stm32f1xx_hal.h,Inc/stm32f1xx_hal_gpio.h,Inc/stm32f1xx_hal_i2c.h,Inc/stm32f1xx_hal_uart.h,Inc/stm32f1xx_hal_tim.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "2d19a001-c697-49b7-ba3e-71a3f85cdbf1",
       "layer_level": 1,
       "order": 1,
@@ -251,8 +251,8 @@
       "prompt": "为 Cortex-M3 内核服务与 DMA 子系统创建参考文档。说明 NVIC 中断分组 `HAL_NVIC_SetPriorityGrouping`、中断使能 `HAL_NVIC_EnableIRQ`、优先级设置 `HAL_NVIC_SetPriority` 的规则及抢占/子优先级行为；SysTick 时基初始化、时钟源选择、中断优先级和延时实现。DMA 部分涵盖通道选择、数据源/目标地址、传输方向、数据宽度对齐、内存/外设突发、循环/正常模式、半满/满中断，以及 `HAL_DMA_Init`、`HAL_DMA_Start`、`HAL_DMA_Start_IT`、`HAL_DMA_Abort` 等接口。提供按键或 UART 接收使用 DMA 的最小代码片段，并解释 DMA 与中断、外设 HAL 回调之间的关系。讨论栈溢出、中断屏蔽、调试器冻结 DMA、地址对齐、缓存未命中（如适用）和性能优化建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_cortex.h,Src/stm32f1xx_hal_cortex.c,Inc/stm32f1xx_hal_dma.h,Src/stm32f1xx_hal_dma.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "e460944e-49a3-47bb-a327-e591ebabff7b",
       "layer_level": 1,
       "order": 1,
@@ -271,8 +271,8 @@
       "prompt": "为 STM32F1xx HAL 的 SPI 接口创建详细文档。说明 SPI_HandleTypeDef 与 SPI_InitTypeDef，重点解释通信模式（全双工、半双工、仅收发）、主从选择、时钟极性 CPOL 与相位 CPHA、波特率分频、NSS 硬件/软件管理、MSB/LSB 优先、数据帧格式。覆盖 HAL_SPI_Transmit/Receive/Send、HAL_SPI_TransmitReceive、HAL_SPI_Transmit_IT/Receive_IT/Transfer_IT、HAL_SPI_Transmit_DMA/Receive_DMA/Transfer_DMA 等 API，并说明回调 HAL_SPI_TxCpltCallback、HAL_SPI_RxCpltCallback、HAL_SPI_ErrorCallback 的使用。提供典型代码：SPI Flash 页读写、ADC 数据采集、多设备 NSS 切换。讨论 SPI 时序、时钟频率上限、MOSI/MISO/CLK/NSS 引脚复用、CS 建立保持时间、DMA 缓冲区对齐、中断优先级、SPI 冲突与故障排查。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_spi.h,Src/stm32f1xx_hal_spi.c,Inc/stm32f1xx_ll_spi.h,Src/stm32f1xx_ll_spi.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "order": 1,
@@ -291,8 +291,8 @@
       "prompt": "为 STM32F1xx HAL DAC 模块创建详细文档，聚焦 DAC 输出控制、波形生成和 DMA 驱动能力。先说明 DAC 外设的基本原理：输出通道、参考电压、输出缓冲、保持时间、更新事件与引脚复用关系，再介绍 HAL 句柄 `DAC_HandleTypeDef` 及扩展配置结构体。分别讲解软件触发、硬件触发（定时器触发）、直接数值写入、DMA 连续输出、噪声波和三角波发生器的配置与使用。对核心 API（如 `HAL_DAC_Init`、`HAL_DAC_ConfigChannel`、`HAL_DAC_SetValue`、`HAL_DAC_Start`、`HAL_DAC_Start_DMA`、`HAL_DAC_Stop`、`HAL_DAC_IRQHandler`、`HAL_DAC_ConvCpltCallback` 等）给出参数、返回值、状态码和调用时序说明。结合 stm32f1xx_hal_dac[_ex].h/.c 提供完整示例：GPIO 与 RCC 初始化、MSP 钩子、设置直流电压、用定时器触发产生周期性波形、通过 DMA 输出波形数组，并演示如何计算数字值到实际电压的映射。讨论输出精度、建立时间、噪声、负载驱动能力和功耗之间的权衡。涵盖常见问题排查，例如输出漂移、纹波过大、DMA 缓冲区未对齐、触发源不匹配、输出缓冲关闭导致的带载能力不足。最后给出从 HAL 迁移到 stm32f1xx_ll_dac.h/.c 的建议，指出哪些场景适合直接使用 LL 以获得更精确的定时控制和更小的代码体积。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_dac.h,Src/stm32f1xx_hal_dac.c,Inc/stm32f1xx_hal_dac_ex.h,Src/stm32f1xx_hal_dac_ex.c,Inc/stm32f1xx_ll_dac.h,Src/stm32f1xx_ll_dac.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "af2130d4-175f-44e9-821a-cfbc4ccf36fa",
       "layer_level": 1,
       "order": 1,
@@ -313,8 +313,8 @@
       "prompt": "创建 STM32F1xx LL GPIO 低层接口的 API 文档。说明 LL_GPIO 通过位带或掩码操作直接访问 GPIOx_IDR/ODR/BSRR/BRR/LCKR 等寄存器，适用于按键输入、LED 输出、外部中断引脚配置等对时序敏感的场景。文档化主要函数族：__HAL_RCC_GPIOx_CLK_ENABLE、__HAL_GPIO_AFSEL_CONFIG、__HAL_GPIO_PIN_MASK、__HAL_GPIO_PIN_SET/CLEAR、__HAL_GPIO_READ/SET/RESET、__HAL_GPIO_EXTI_LINE_CONFIG、__HAL_GPIO_EXTI_GENERATE_SWINT 等，包括参数含义（Pin、Mode、Speed、Pull、Alternate）、返回值和使用约束（必须先使能时钟、注意端口组映射）。提供 LED 闪烁、按键轮询读取、EXTI 中断回调的最小 LL 示例，并与对应 HAL 调用进行对照。说明多外设共享引脚时的复用模式注意事项，以及 LL GPIO 在 STM32F103x 不同封装间的可移植性限制。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_gpio.h,Src/stm32f1xx_ll_gpio.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 1,
@@ -331,8 +331,8 @@
       "prompt": "为 STM32F1xx HAL 的 FSMC 外扩存储器驱动创建详细文档。分别说明 NAND、NOR、SRAM 和 PC Card 四种存储介质的 HAL 接口、初始化步骤、地址空间划分、片选与时序配置、页/块/行/列结构、读写命令序列、ECC 支持（如适用）、中断/DMA 处理和错误恢复机制。结合 stm32f1xx_hal_nand.c、stm32f1xx_hal_nor.c、stm32f1xx_hal_sram.c、stm32f1xx_hal_pccard.c 提供典型用法示例：在 NOR/SRAM 中直接指针访问数据缓冲区，在 NAND 中按页读写并管理坏块，在 PC Card 中加载外部存储设备。解释 FSMC 控制寄存器与时序参数的选择原则，以及不同介质在带宽、延迟、并行度上的差异。讨论总线占用、内存映射冲突、上电时序、掉电保护和调试诊断实践。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_nand.h,Src/stm32f1xx_hal_nand.c,Inc/stm32f1xx_hal_nor.h,Src/stm32f1xx_hal_nor.c,Inc/stm32f1xx_hal_sram.h,Src/stm32f1xx_hal_sram.c,Inc/stm32f1xx_hal_pccard.h,Src/stm32f1xx_hal_pccard.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "0d2d1617-6010-4fcb-b306-32abe3522d47",
       "layer_level": 1,
       "order": 1,
@@ -355,8 +355,8 @@
       "prompt": "为 STM32F1xx HAL 的独立看门狗 IWDG 与窗口看门狗 WWDG 创建综合文档。首先对比两者的硬件特性：IWDG 由内部 LSI 驱动、仅支持喂狗，WWDG 使用 APB1 时钟并支持窗口比较器与提前唤醒中断 EWIF。详细说明 HAL_IWDG_InitTypeDef 与 HAL_WWDG_InitTypeDef 的配置字段，包括预分频系数、重载值、窗口比较值、计数器初始值、超时策略等。基于 stm32f1xx_hal_iwdg.c 与 stm32f1xx_hal_wwdg.c 给出实际代码示例：IWDG 的 HAL_IWDG_Init、HAL_IWDG_Start、HAL_IWDG_Refresh；WWDG 的 HAL_WWDG_Init、HAL_WWDG_Start、HAL_WWDG_Start_IT、HAL_WWDG_Callback、HAL_WWDG_AwakeCallback、HAL_WWDG_EventCallback。解释喂狗窗口概念、早期唤醒中断的使用场景、喂狗时序约束、窗口越界与下溢复位的行为。讨论系统任务调度中的喂狗策略、临界区保护、低优先级任务导致超时的诊断方法、调试器暂停对看门狗的影响、功耗与可靠性设计建议。涵盖常见问题：喂狗过早或过晚、窗口配置错误、中断优先级不足、调试时未正确关闭看门狗、多次初始化导致状态异常等。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_iwdg.h,Src/stm32f1xx_hal_iwdg.c,Inc/stm32f1xx_hal_wwdg.h,Src/stm32f1xx_hal_wwdg.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "a3d9a74e-ce5f-4c65-8d70-18626badd572",
       "layer_level": 1,
       "order": 1,
@@ -375,8 +375,8 @@
       "prompt": "为 STM32F1xx HAL 的 UART/USART 接口创建全面文档。区分 UART（无时钟）与 USART（支持同步、SmartCard、IrDA）的使用场景，说明 UART_HandleTypeDef/USART_InitTypeDef 中的波特率、停止位、校验位、硬件流控、过采样、单/双向模式等配置。覆盖同步、异步、多处理器、LIN、半双工、多主机等模式，以及 HAL_UART_Transmit/Receive、HAL_USART_Transmit/Receive、HAL_UARTEx_ReceiveToIdle 等 API。详细说明中断与 DMA 两种异步路径，包括 HAL_UART/Tx/RxCpltCallback、HAL_UART/ErrorCallback 及 IDLE 中断接收用法。提供示例：串口打印、终端交互、DMA+IDLE 接收不定长数据、USART 同步时钟输出。讨论波特率误差计算、TX/RX FIFO/DR 寄存器、RXNE/TXE/ORE/FE/PE 标志、CTS/RTS 流控、RS-485 半双工控制、中断嵌套与性能优化。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_uart.h,Src/stm32f1xx_hal_uart.c,Inc/stm32f1xx_hal_usart.h,Src/stm32f1xx_hal_usart.c,Inc/stm32f1xx_ll_usart.h,Src/stm32f1xx_ll_usart.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "order": 2,
@@ -397,8 +397,8 @@
       "prompt": "为 STM32F1xx HAL 以太网 MAC 接口创建详细文档。重点说明以太网控制器初始化、MII/RMII 模式选择、PHY 配置、MAC 地址设置、帧收发、DMA 描述符链、接收/发送中断、丢包处理和功耗相关配置。结合 stm32f1xx_hal_eth.h/.c，解释 ETH_HandleTypeDef、ETH_MACTypeDef、ETH_DMADescTypeDef、ETH_InitTypeDef 和 ETH_MACInitializeTypeDef 的作用，并给出最小示例：配置 RMII/MII、初始化 MAC 与 DMA、绑定 TX/RX 描述符、发送一帧以太网数据并在 HAL_ETH_RxCpltCallback / HAL_ETH_TxCpltCallback 中释放缓冲区。讨论 MII/RMII 引脚复用、外部 PHY 型号、时钟来源、参考时钟极性、半双工/全双工、自动协商、CRC 校验、Jumbo Frame、流量控制、中断优先级、DMA 缓存一致性和内存对齐要求。提供常见问题的排查方法，包括 PHY 无响应、链路无法建立、只能收不能发、大量 CRC 错误、DMA 卡死、描述符环溢出和网络丢包。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_eth.h,Src/stm32f1xx_hal_eth.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "10dcd435-1062-4a06-8022-78add5f47b1a",
       "layer_level": 1,
       "order": 2,
@@ -415,8 +415,8 @@
       "prompt": "为 STM32F1xx HAL 的 SD/MMC 卡接口创建详细文档。说明 stm32f1xx_hal_sd.[h,c] 与 stm32f1xx_hal_mmc.[h,c] 提供的 SD 卡与 MMC 卡驱动入口，包括 SDMMC 时钟与 GPIO 初始化、Card_Init/Card_Config、CMD/CRC/RCA 相关流程、数据传输模式、DMA/中断使用、状态机生命周期和错误码处理。区分 SD 卡与 MMC 卡在协议层、容量类型、寻址方式和使用场景上的差异，并结合代码给出典型操作示例：枚举卡类型、获取 CSD/MCID 信息、按块读写文件级数据、处理忙状态与超时。说明 SDMMC 总线的频率、总线宽度、时钟分频、电源域与信号完整性约束。讨论大文件传输性能、DMA 缓冲管理、写保护、掉电安全、卡移除检测、CRC 错误恢复与故障排查方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_sd.h,Src/stm32f1xx_hal_sd.c,Inc/stm32f1xx_hal_mmc.h,Src/stm32f1xx_hal_mmc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "0d2d1617-6010-4fcb-b306-32abe3522d47",
       "layer_level": 1,
       "order": 2,
@@ -435,8 +435,8 @@
       "prompt": "为 PWR、RCC 与 RTC 子系统创建全面文档。解释 RCC 时钟树初始化流程：HSI/HSE、PLL 配置、AHB/APB 总线分频、各外设时钟使能，以及 `HAL_RCC_OscConfig`、`HAL_RCC_ClockConfig`、`HAL_RCC_GetHCLKFreq` 等关键接口；说明时钟切换过程中的稳定性检查与失败处理。PWR 部分覆盖低功耗模式（待机、停止）、唤醒源配置、电压调节器和备份域访问，并结合 stm32f1xx_hal_pwr.{h,c} 给出进入待机并唤醒的最小示例。RTC 部分介绍 RTC 初始化、时间/日期读写、闹钟配置、秒中断、备份寄存器基础操作，以及与 PWR/RCC 在后备域中的关系。讨论 HSE 起振失败、PLL 失锁、低频时钟来源、复位后备份域数据保留、调试器影响和低功耗唤醒时序等工程问题。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_pwr.h,Src/stm32f1xx_hal_pwr.c,Inc/stm32f1xx_hal_rcc.h,Src/stm32f1xx_hal_rcc.c,Inc/stm32f1xx_hal_rtc.h,Src/stm32f1xx_hal_rtc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "e460944e-49a3-47bb-a327-e591ebabff7b",
       "layer_level": 1,
       "order": 2,
@@ -457,8 +457,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的 MSP（MCU Specific Peripheral）钩子系统创建详细文档。解释为什么 HAL 将引脚复用、时钟使能、中断优先级、DMA 通道等板级细节交给用户实现 HAL_GPIO_MspInit、HAL_I2C_MspInit、HAL_SPI_MspInit、HAL_UART_MspInit、HAL_TIM_MspInit 等函数。以 stm32f1xx_hal_msp_template.c 为例，逐步演示如何为一个具体开发板编写 GPIO、I2C、USART、TIM 的 MSP 初始化与反初始化逻辑，包括 RCC 时钟配置、NVIC 中断分组与优先级、GPIO 模式与速度设置、DMA 请求线映射。说明 HAL 如何在各外设初始化流程中调用这些弱符号钩子，以及未实现时的默认行为。提供完整的最小可用 BSP 示例，并列出常见问题（重复初始化、时钟未开启、中断优先级冲突、引脚复用错误）及其排查步骤。",
       "progress_status": "completed",
       "dependent_files": "Src/stm32f1xx_hal_msp_template.c,Inc/stm32f1xx_hal_gpio.h,Inc/stm32f1xx_hal_i2c.h,Inc/stm32f1xx_hal_spi.h,Inc/stm32f1xx_hal_usart.h,Inc/stm32f1xx_hal_tim.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "2d19a001-c697-49b7-ba3e-71a3f85cdbf1",
       "layer_level": 1,
       "order": 2,
@@ -479,8 +479,8 @@
       "prompt": "为 STM32F1xx HAL 时基服务创建专项文档，重点说明默认 SysTick 时基与两种可选模板：stm32f1xx_hal_timebase_tim_template.c（基于通用定时器）和 stm32f1xx_hal_timebase_rtc_alarm_template.c（基于 RTC 闹钟）。解释 HAL_Init 如何通过 __weak 钩子注册时基中断，以及 HAL_Delay、HAL_GetTick、HAL_IncTick 如何依赖该时基实现毫秒级延时与时间戳递增。详细说明 SysTick 作为默认时基的实现位置与限制，TIM 时基模板中定时器预分频、ARR 周期计算、Update 中断与 HAL_IncTick 的关系，RTC 时基模板中 RTC Alarm A 中断、日历/闹钟配置及 Tick 增量逻辑。给出替换默认时基的步骤：包含对应模板文件、确保中断优先级正确、避免与业务中断冲突、检查 HAL_Init 调用顺序。讨论不同时钟源（HSE/HSE_LSE、PLL、LSI/LSE）对 Tick 精度的影响、中断抢占导致的延时抖动、RTOS 环境下的 Tick 管理、低功耗模式下 SysTick 停止或频率变化时的注意事项。提供调试方法：使用断点观察 HAL_IncTick、用示波器或逻辑分析仪测量中断间隔、验证定时器/RTC 中断是否被正确屏蔽与清除标志位。",
       "progress_status": "completed",
       "dependent_files": "Src/stm32f1xx_hal_timebase_tim_template.c,Src/stm32f1xx_hal_timebase_rtc_alarm_template.c,Src/stm32f1xx_hal.c,Inc/stm32f1xx_hal.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "a3d9a74e-ce5f-4c65-8d70-18626badd572",
       "layer_level": 1,
       "order": 2,
@@ -499,8 +499,8 @@
       "prompt": "创建 STM32F1xx LL I2C 低层接口的 API 文档。解释 LL_I2C 如何直接操作 I2Cx_CR1、CR2、SR1/SR2、DR、OAR1、TIMINGR 等寄存器，实现主机发送/接收、从机应答和超时检测。文档化常用函数族：__HAL_I2C_ENABLE/DISABLE、__HAL_I2C_RESET、__HAL_I2C_SET_OWN_ADDRESS7、__HAL_I2C_SET_TIMINGR、__HAL_I2C_GENERATE_START/STOP、__HAL_I2C_SEND_DATA、__HAL_I2C_RECEIVE_DATA、__HAL_I2C_GET_FLAG/CLEAR_FLAG、__HAL_I2C_IS_ACTIVE_FLAG_SET 等，说明 MasterTransmitterAddress、MasterReceiverAddress、AddrMode、RequestTransferDirection、OwnAddress2、GeneralCallAddres 等参数的硬件约束。提供主机写 EEPROM、主机读传感器数据的 LL 示例，并指出 I2C SR1/SR2 状态机中常见的 BUSY、AF、ADDR、BTF、STOPF 标志处理顺序。对比 HAL_I2C_Mem_Write 与 LL 手动状态机的差异，说明何时使用 LL 能获得更短的中断路径。包含常见错误：时钟频率计算、ACK/NACK 处理、重复起始条件、总线锁死恢复。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_i2c.h,Src/stm32f1xx_ll_i2c.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 2,
@@ -517,8 +517,8 @@
       "prompt": "为 STM32F1xx HAL 的通信接口族创建全面文档。覆盖 I2C、SPI、UART/USART、I2S、CAN、CEC、SmartCard、IrDA 等外设的 HAL 接口，统一说明句柄结构体初始化、同步/异步传输、DMA 支持、中断回调、超时控制与错误码处理。对每个接口给出典型使用模式：主机/从机、全双工/半双工、轮询/中断/DMA 三种路径，并引用 stm32f1xx_hal_{i2c,spi,usart,uart,i2s,can,cec,smartcard,irda}.h/.c 中的关键函数原型。解释通信时序、帧格式、时钟极性与相位、波特率/位速率配置、仲裁与冲突处理等关键点。提供实际代码片段展示常见用例（如 I2C 写传感器、SPI Flash 读写、UART 打印、CAN 报文收发）。讨论性能对比、缓冲区管理、优先级与中断嵌套、总线竞争及调试技巧。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_i2c.h,Src/stm32f1xx_hal_i2c.c,Inc/stm32f1xx_hal_spi.h,Src/stm32f1xx_hal_spi.c,Inc/stm32f1xx_hal_usart.h,Src/stm32f1xx_hal_usart.c,Inc/stm32f1xx_hal_uart.h,Src/stm32f1xx_hal_uart.c,Inc/stm32f1xx_hal_i2s.h,Src/stm32f1xx_hal_i2s.c,Inc/stm32f1xx_hal_can.h,Src/stm32f1xx_hal_can.c,Inc/stm32f1xx_hal_cec.h,Src/stm32f1xx_hal_cec.c,Inc/stm32f1xx_hal_smartcard.h,Src/stm32f1xx_hal_smartcard.c,Inc/stm32f1xx_hal_irda.h,Src/stm32f1xx_hal_irda.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 2,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_i2c.h",
@@ -549,8 +549,8 @@
       "prompt": "为 STM32F1xx HAL 的 I2S 接口创建详细文档。说明 I2S_HandleTypeDef 与 I2S_InitTypeDef，重点解释 I2S 模式（主机/从机、发送/接收）、音频协议（Philips、MSB、LSB、PCM）、帧格式（短帧/长帧、数据宽度、声道边沿）、时钟极性、标准模式与扩展模式，以及与 SPI 外设共享的实现关系。覆盖 HAL_I2S_Transmit/Receive、HAL_I2S_Transmit_IT/Receive_IT、HAL_I2S_Transmit_DMA/Receive_DMA 及对应回调函数。给出典型用例：I2S ADC 采集音频、I2S DAC 播放 PCM、TDM 或 Stereo 模式连接 Codec。讨论音频采样率与 I2S 时钟关系、帧同步线 WS/LRCLK、DMA 环形缓冲、中断延迟对音频质量的影响、时钟串扰与调试技巧。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_i2s.h,Src/stm32f1xx_hal_i2s.c,Inc/stm32f1xx_ll_spi.h,Src/stm32f1xx_ll_spi.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "order": 3,
@@ -569,8 +569,8 @@
       "prompt": "为 STM32F1xx HAL 的 CRC 服务创建详细文档。说明 `HAL_CRC_Init` 初始化参数、数据输入宽度（8/16/32 bit）、初始值、反转输入/输出位、多项式配置，以及 `HAL_CRC_Compute`、`HAL_CRC_Accumulate`、`HAL_CRC_Input`、`HAL_CRC_IRQHandler` 等接口的区别与使用场景。给出计算缓冲区 CRC、增量累加和字节/字流式处理的代码示例，并与软件实现对比。讨论 DMA 配合 CRC 时的注意事项、硬件 CRC 与 Flash 读取冲突、性能优势、测试用例设计和与上层协议校验逻辑的集成方式。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_crc.h,Src/stm32f1xx_hal_crc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "e460944e-49a3-47bb-a327-e591ebabff7b",
       "layer_level": 1,
       "order": 3,
@@ -587,8 +587,8 @@
       "prompt": "为 STM32F1xx HAL 的 ADC 与 DAC 模拟信号处理模块创建详细文档。解释 ADC 的单通道采集、多通道扫描、注入组转换、外部触发、连续/单次模式、分辨率与采样时间配置，以及 DMA 与中断下的数据采集流程。说明 DAC 的电压输出、波形发生器、噪声/三角波输出、DMA 输出和软件/硬件触发方式。结合 stm32f1xx_hal_adc[_ex].h/.c 与 stm32f1xx_hal_dac[_ex].h/.c 给出完整的初始化、启动转换、读取结果和回调实现示例。讨论校准、基准电压选择、输入阻抗、噪声抑制、转换精度与吞吐率的权衡。提供从 HAL 切换到 LL 接口的迁移建议，并涵盖常见调试问题（如 ADC 读数异常、DAC 输出漂移、DMA 配置错误）。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_adc.h,Src/stm32f1xx_hal_adc.c,Inc/stm32f1xx_hal_adc_ex.h,Src/stm32f1xx_hal_adc_ex.c,Inc/stm32f1xx_hal_dac.h,Src/stm32f1xx_hal_dac.c,Inc/stm32f1xx_hal_dac_ex.h,Src/stm32f1xx_hal_dac_ex.c,Inc/stm32f1xx_ll_adc.h,Src/stm32f1xx_ll_adc.c,Inc/stm32f1xx_ll_dac.h,Src/stm32f1xx_ll_dac.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 3,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_adc.h",
@@ -613,8 +613,8 @@
       "prompt": "创建 STM32F1xx LL SPI 低层接口的 API 文档。说明 LL_SPI 直接管理 SPIx_CR1/CR2、DR、SR、CR1、CR2、ICR 等寄存器，支持全双工、半双工、单向收发、NSS 硬件/软件管理和多种帧格式。文档化关键函数族：__HAL_SPI_ENABLE/DISABLE、__HAL_SPI_RESET、__HAL_SPI_SET_BAUDRATE_PRESCALER、__HAL_SPI_SET_FIRST_BIT、__HAL_SPI_SET_DIRECTION、__HAL_SPI_SET_NSS_MODE、__HAL_SPI_ENABLE_IT、__HAL_SPI_TX_ENABLE、__HAL_SPI_RX_ENABLE、__HAL_SPI_SEND_DATA、__HAL_SPI_RECEIVE_DATA、__HAL_SPI_GET_FLAG/CLEAR_FLAG 等，解释 CPOL、CPHA、DFF、MSTR、CRC 计算方向等参数的硬件含义。提供 SPI Flash 写入/读取、SPI 传感器采集的 LL 示例，并说明如何通过 __HAL_SPI_TXE/NE/FRE/OVR/CRCE 标志判断传输完成。对比 HAL_SPI_Transmit/Receive 与 LL 轮询/中断实现的差异，指出 LL 在 DMA 未启用时仍需手动搬运数据。包含常见陷阱：NSS 电平极性、主从模式不匹配、时钟极性与相位错误、溢出标志清除顺序。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_spi.h,Src/stm32f1xx_ll_spi.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 3,
@@ -631,8 +631,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的系统生命周期与 Tick 时基创建详细文档。基于 Src/stm32f1xx_hal.c 中的 HAL_Init、HAL_InitTick、HAL_IncTick、HAL_Delay、HAL_GetTick 等函数，描述 MCU 上电后的初始化序列：RCC 配置、SysTick 或 RTC 时基选择、Systick_Handler 中断处理、HAL_ExitModeRoutine 等。解释 SysTick 时基与 TIM/RTC 时基模板的区别，以及如何选择 stm32f1xx_hal_timebase_tim_template.c 或 stm32f1xx_hal_timebase_rtc_alarm_template.c 作为新的时基实现。说明 HAL_Delay 与 HAL_GetTick 的内部计时精度、中断上下文安全要求和在多核/RTOS 环境下的注意事项。给出从 HAL_Init 到应用程序主循环的数据流图，并提供自定义时基实现的参考步骤、精度验证方法和常见故障（Tick 不递增、延时不准、中断优先级过低）。",
       "progress_status": "completed",
       "dependent_files": "Src/stm32f1xx_hal.c,Inc/stm32f1xx_hal.h,Src/stm32f1xx_hal_timebase_tim_template.c,Src/stm32f1xx_hal_timebase_rtc_alarm_template.c,Inc/stm32f1xx_hal_cortex.h,Src/stm32f1xx_hal_cortex.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "2d19a001-c697-49b7-ba3e-71a3f85cdbf1",
       "layer_level": 1,
       "order": 3,
@@ -653,8 +653,8 @@
       "prompt": "为 STM32F1xx HAL 的 CAN 接口创建全面文档。说明 CAN_HandleTypeDef、CAN_FilterTypeDef、CAN_TxMsgHeaderTypeDef、CAN_RxMsgHeaderTypeDef 的结构与作用，解释 CAN_Init 中的自动唤醒、休眠、非对称滤波屏蔽符、时间分割等选项，以及 MSP 钩子中 CAN TX/RX 引脚与中断配置。覆盖 HAL_CAN_AddTxMessage、HAL_CAN_ActivateNotification、HAL_CAN_GetRxMessage、HAL_CAN_IRQHandler、HAL_CAN_TxCpltCallback、HAL_CAN_RxCpltCallback、HAL_CAN_ErrorCallback 等 API。提供典型用例：发送标准/扩展 ID 报文、过滤特定节点消息、错误状态恢复、与 Legacy HAL 迁移。讨论 CAN 位定时、采样点、波特率设置、仲裁丢失、错误计数器、Bus Off/Error Passive 状态、中断优先级与总线负载分析。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_can.h,Src/stm32f1xx_hal_can.c,Inc/Legacy/stm32f1xx_hal_can_legacy.h,Inc/Legacy/stm32f1xx_hal_can_ex_legacy.h,Src/Legacy/stm32f1xx_hal_can.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "order": 4,
@@ -674,8 +674,8 @@
       "prompt": "为 STM32F1xx HAL 的定时与控制子系统创建综合文档。重点覆盖 TIM 通用/高级定时器、IWDG 独立看门狗、WWDG 窗口看门狗，以及 SysTick/RTC 时基模板的使用。详细说明 TIM 的基本计数、PWM 输出、输入捕获、编码器接口、互补输出、死区控制和多通道配置；解释看门狗的预分频器、重装值、窗口比较器及喂狗策略。结合 stm32f1xx_hal_tim[_ex].h/.c、stm32f1xx_hal_iwdg.c、stm32f1xx_hal_wwdg.c 给出初始化、启动、中断回调和 DMA 配置的代码示例。解释 stm32f1xx_hal_timebase_tim_template.c 与 stm32f1xx_hal_timebase_rtc_alarm_template.c 如何替换默认 SysTick 时基。讨论中断优先级、溢出处理、抖动、功耗影响和实时性保证，并提供调试与故障排查建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_tim.h,Src/stm32f1xx_hal_tim.c,Inc/stm32f1xx_hal_tim_ex.h,Src/stm32f1xx_hal_tim_ex.c,Inc/stm32f1xx_hal_iwdg.h,Src/stm32f1xx_hal_iwdg.c,Inc/stm32f1xx_hal_wwdg.h,Src/stm32f1xx_hal_wwdg.c,Src/stm32f1xx_hal_timebase_tim_template.c,Src/stm32f1xx_hal_timebase_rtc_alarm_template.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 4,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_tim.h",
@@ -698,8 +698,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的配置系统与模块裁剪机制创建详细文档。逐项说明 stm32f1xx_hal_conf_template.h 中的关键宏：USE_FULL_LL_DRIVER、USE_HAL_DRIVER、USE_HAL_ADC_REGISTER_CALLBACKS、USE_HAL_CAN_REGISTER_CALLBACKS、USE_HAL_DAC_REGISTER_CALLBACKS、USE_HAL_I2C_REGISTER_CALLBACKS、USE_HAL_I2S_REGISTER_CALLBACKS、USE_HAL_MMC_REGISTER_CALLBACKS、USE_HAL_SD_REGISTER_CALLBACKS、USE_HAL_UART_REGISTER_CALLBACKS、USE_HAL_USART_REGISTER_CALLBACKS、USE_HAL_PCD_REGISTER_CALLBACKS 等对编译产物和功能的影响。解释 USE_HAL_I2C_ENABLE、USE_HAL_SPI_ENABLE、USE_HAL_UART_ENABLE 等模块开关如何实现驱动库裁剪，减少 ROM/RAM 占用。说明 HSE_VALUE、HSE_STARTUP_TIMEOUT、USE_RTC_CRS 等时钟与振荡器相关配置的作用和校验方式。阐述 stm32_assert_template.h 中 assert_param 断言的工作机制，以及如何启用/禁用运行时参数检查。提供典型项目的 hal_conf.h 配置示例，并给出裁剪后链接失败、功能缺失、时钟频率错误的排查清单。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_conf_template.h,Inc/stm32_assert_template.h,Inc/stm32f1xx_hal.h,Src/stm32f1xx_hal.c,Inc/stm32f1xx_hal_rcc.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "2d19a001-c697-49b7-ba3e-71a3f85cdbf1",
       "layer_level": 1,
       "order": 4,
@@ -719,8 +719,8 @@
       "prompt": "创建 STM32F1xx LL TIM 低层接口的 API 文档。说明 LL_TIM 直接封装定时器基本计数、更新中断、PWM 输出、输入捕获、编码器模式和互补输出等功能，核心寄存器包括 ARR、PSC、CCR、DIER、SR、CNT、CR1/CR2。文档化常用函数族：__HAL_TIM_ENABLE/DISABLE、__HAL_TIM_PRESCALER_CONFIG、__HAL_TIM_AUTORELOAD_PRELOAD_CONFIG、__HAL_TIM_SET_AUTORELOAD、__HAL_TIM_SET_COMPARE、__HAL_TIM_GET_COUNTER、__HAL_TIM_ENABLE_IT、__HAL_TIM_DISABLE_IT、__HAL_TIM_CLEAR_FLAG、__HAL_TIM_IS_TIM_COUNTING_DOWN、__HAL_TIM_ENCODER_INTERFACE_CONFIG 等，解释 Prescaler、CounterMode、Period、Pulse、ClockDivision、OCMode、ICPolarity、ICSelection、EncoderMode 等参数。提供基本定时中断、PWM 调光、电机编码器计数的 LL 示例，并说明与 HAL_TIM_Base_Init、HAL_TIM_PWM_ConfigChannel 的对应关系。重点说明 TIM2/TIM5 等通用定时器与 TIM1/TIM8 高级定时器在 CCER、BDTR、CH1P 等寄存器上的差异，提醒 LL 代码在不同 F1 子型号间需要额外校验。包含中断优先级设置、溢出处理、死区时间（高级定时器）和性能优化建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_tim.h,Src/stm32f1xx_ll_tim.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 4,
@@ -737,8 +737,8 @@
       "prompt": "为 STM32F1xx HAL 的存储与总线接口创建详细文档。覆盖内置 Flash 的页擦除、字编程、选项字节操作，FSMC 外扩存储器控制器驱动的 NAND/NOR/SRAM/PC Card，以及 SD/MMC 卡接口。说明各存储介质的地址映射、访问时序、页/块大小、编程限制、写保护与安全特性。结合 stm32f1xx_hal_flash[_ex].c、stm32f1xx_hal_nand/nor/sram/pccard.c、stm32f1xx_hal_sd/mmc.c 给出典型读写流程、初始化步骤、中断/DMA 处理和错误恢复示例。讨论闪存磨损均衡、掉电安全、总线带宽、延迟和可靠性考量，并给出数据持久化、固件升级和故障诊断的实践建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_flash.h,Src/stm32f1xx_hal_flash.c,Inc/stm32f1xx_hal_flash_ex.h,Src/stm32f1xx_hal_flash_ex.c,Inc/stm32f1xx_hal_nand.h,Src/stm32f1xx_hal_nand.c,Inc/stm32f1xx_hal_nor.h,Src/stm32f1xx_hal_nor.c,Inc/stm32f1xx_hal_sram.h,Src/stm32f1xx_hal_sram.c,Inc/stm32f1xx_hal_pccard.h,Src/stm32f1xx_hal_pccard.c,Inc/stm32f1xx_hal_sd.h,Src/stm32f1xx_hal_sd.c,Inc/stm32f1xx_hal_mmc.h,Src/stm32f1xx_hal_mmc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 5,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_flash.h",
@@ -767,8 +767,8 @@
       "prompt": "为 STM32F1xx HAL 的 CEC 接口创建详细文档。说明 CEC_HandleTypeDef 与 CEC_InitTypeDef，重点解释 CEC 物理层特性：引脚配置、Prescaler、Bit Timing Error/Bit Free 定时器、Reception Gain 等参数。覆盖 HAL_CEC_Init、HAL_CEC_Transmit、HAL_CEC_Receive、HAL_CEC_IRQHandler、HAL_CEC_TxCpltCallback、HAL_CEC_RxCpltCallback、HAL_CEC_ErrorCallback 等 API。给出典型用例：CEC 命令发送与响应、广播帧处理、目标地址与源地址匹配。讨论 CEC 帧格式、位编码、Start/End of Frame、ACK/NACK、重传机制、总线冲突、噪声干扰与调试方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_cec.h,Src/stm32f1xx_hal_cec.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "order": 5,
@@ -785,8 +785,8 @@
       "prompt": "创建 STM32F1xx LL USART/UART 低层接口的 API 文档。说明 LL_USART 直接操作 BRR、CR1/CR2/CR3、SR、DR、GTPR 等寄存器，支持异步通信、同步模式、LIN、多处理器、单线半双工、硬件流控和 IrDA/PWM 模式。文档化关键函数族：__HAL_USART_ENABLE/DISABLE、__HAL_USART_RESET、__HAL_USART_BAUDRATE_CONFIG、__HAL_USART_WORD_LENGTH_CONFIG、__HAL_USART_PARITY_CONFIG、__HAL_USART_STOPBITS_CONFIG、__HAL_USART_HARDWARE_FLOW_CONTROL_CONFIG、__HAL_USART_ENABLE_IT、__HAL_USART_DISABLE_IT、__HAL_USART_SEND_DATA、__HAL_USART_RECEIVE_DATA、__HAL_USART_GET_FLAG/CLEAR_FLAG、__HAL_USART_TXRX_SELECT 等，解释 BaudRate、WordLength、Parity、StopBits、HardwareFlowControl、ClockPolarity、ClockPhase、LastBit 等参数。提供 UART 字符串发送、串口中断接收、USART 同步时钟模式的 LL 示例，并说明 TXE、TC、RXNE、IDLE、ORE、FE、PE、NF、ORE 标志的处理流程。对比 HAL_UART_Transmit/Receive 与 LL 方式在 RTOS 或裸机中的差异，强调 LL 更适合需要精确控制中断路径和最小代码体积的场景。包含波特率计算、FIFO/DR 行为、过运行错误处理和调试方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_usart.h,Src/stm32f1xx_ll_usart.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 5,
@@ -803,8 +803,8 @@
       "prompt": "为 STM32F1xx HAL 的 USB 与网络接口创建专业文档。重点说明 USB 设备端（PCD）的设备枚举、端点配置、控制/批量/中断/等时传输、挂起与唤醒、DMA 传输；USB 主机端（HCD）的连接管理与数据传输；以及以太网 MAC 的初始化、帧收发、中断与 DMA 集成。结合 stm32f1xx_hal_pcd[_ex].h/.c、stm32f1xx_hal_hcd.h/.c、stm32f1xx_hal_eth.h/.c 给出设备描述符、端点注册、发送/接收数据和事件回调的最小示例。讨论 USB 总线供电、带宽限制、MTU、PHY 配置、中断优先级和调试方法。如需，提供从 HAL 迁移到 LL_USB 接口的指导，并涵盖常见连接失败、枚举错误和网络丢包问题的排查思路。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_pcd.h,Src/stm32f1xx_hal_pcd.c,Inc/stm32f1xx_hal_pcd_ex.h,Src/stm32f1xx_hal_pcd_ex.c,Inc/stm32f1xx_hal_hcd.h,Src/stm32f1xx_hal_hcd.c,Inc/stm32f1xx_hal_eth.h,Src/stm32f1xx_hal_eth.c,Inc/stm32f1xx_ll_usb.h,Src/stm32f1xx_ll_usb.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 6,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_pcd.h",
@@ -827,8 +827,8 @@
       "prompt": "为 STM32F1xx HAL 的 SmartCard 与 IrDA 接口创建综合文档。说明这两个接口基于 USART 实现，分别用于 ISO7816 智能卡与红外数据通信。解释 SmartCard_HandleTypeDef 与 IrDA_HandleTypeDef 的配置差异：SmartCard 的 NACK、Guard Time、Block Length、Auto-Retry、Parity 控制；IrDA 的 Preamble Size、Mode（Normal/Pulse Width Modulation）、Power Down 等。覆盖 HAL_SMARTCARD_Init/Transmit/Receive 与 HAL_IRDA_Init/Transmit/Receive，以及对应的中断与 DMA 路径和回调函数。提供用例：智能卡 APDU 命令收发、IrDA 点对点红外数据传输。讨论 SmartCard 正负逻辑、时钟同步、复位序列、防碰撞与错误恢复；IrDA 红外发射接收角度、脉冲调制、距离与速率权衡。说明如何复用 USART 资源、中断优先级与功耗优化建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_smartcard.h,Src/stm32f1xx_hal_smartcard.c,Inc/stm32f1xx_hal_irda.h,Src/stm32f1xx_hal_irda.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
       "layer_level": 1,
       "order": 6,
@@ -847,8 +847,8 @@
       "prompt": "创建 STM32F1xx LL ADC 与 DAC 低层接口的联合 API 文档。对于 LL_ADC，说明其直接操作 ACR、CR1/CR2/SMPCR、SQRx/JSQR、DR、CSR 等寄存器，支持单通道/多通道扫描、注入转换、模拟看门狗、外部触发和连续/单次转换模式；文档化 __HAL_RCC_ADC1_CLK_ENABLE、__HAL_ADC_ENABLE/DISABLE、__HAL_ADC_CALIBRATION、__HAL_ADC_CHANNEL_CONFIG、__HAL_ADC_SEQUENCE_CONFIG、__HAL_ADC_START/STOP、__HAL_ADC_GET_DATA 等函数及 Resolution、ScanDirection、ExternalTrigConv、ContinuousMode、ADC_RegularSequence 等参数。对于 LL_DAC，说明其直接操作 DORx、CR、DHR12Rx/DHR12Lx/DHR12RDx、DACCMDR 等寄存器，支持 12 位右对齐/左对齐输出、三角波/噪声波形、DMA 输出；文档化 __HAL_DAC_ENABLE/DISABLE、__HAL_DAC_SET_VALUE、__HAL_DAC_TRIGGER_CONFIG、__HAL_DAC_DMA_CONFIG 等函数。提供温度传感器采样、DAC 方波输出的 LL 示例，并对比 HAL_ADC_Start/HAL_DAC_SetValue。说明 STM32F1 系列 ADC 分辨率通常为 12 位、采样时间单位、校准流程和 DAC 输出缓冲器的使用约束。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_adc.h,Src/stm32f1xx_ll_adc.c,Inc/stm32f1xx_ll_dac.h,Src/stm32f1xx_ll_dac.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 6,
@@ -867,8 +867,8 @@
       "prompt": "创建 STM32F1xx LL DMA 低层接口的 API 文档。说明 LL_DMA 直接操作 CCR、CNDTR、CPAR、CMAR、ISR、IFCR 等寄存器，支持 DMA1 多个通道在不同外设间的数据搬运，涵盖内存到外设、外设到内存、内存到内存、循环/正常模式和优先级配置。文档化 __HAL_RCC_DMAx_CLK_ENABLE、__HAL_DMA_ENABLE/DISABLE、__HAL_DMA_SET_DIRECTION、__HAL_DMA_SET_PERIPH_INC_DEC、__HAL_DMA_SET_MEMORY_INC_DEC、__HAL_DMA_SET_DATALENGTH、__HAL_DMA_SET_PERIPHERALADDRESS、__HAL_DMA_SET_MEMORYADDRESS、__HAL_DMA_SET_COUNTER、__HAL_DMA_GET_FLAG/CLEAR_FLAG 等函数，解释 Direction、PeriphInc、MemInc、PeriphDataWidth、MemDataWidth、CircularMode、Priority 等参数的硬件语义。提供 UART 发送 + DMA、ADC 多通道扫描 + DMA 的 LL 示例，并说明 DMA 完成标志 TEIF/HTIF/TCIF/TEIF 的处理。对比 HAL_DMA_Start/IRQHandler 与 LL 直接操作差异，强调 DMA 必须配合外设 IT 使能、时钟使能和 NVIC 配置。包含 DMA 冲突、地址不对齐、长度清零、外设与内存宽度不一致等常见问题。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_dma.h,Src/stm32f1xx_ll_dma.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 7,
@@ -885,8 +885,8 @@
       "prompt": "为 STM32F1xx HAL 的系统与基础服务创建全面参考文档。覆盖 GPIO 输入输出、推挽/开漏/复用模式、上下拉、中断引脚映射；EXTI 外部中断的边沿检测与中断线配置；Cortex-M3 内核控制包括 NVIC 中断分组、优先级和 SysTick 配置；DMA 通道、方向、循环/正常模式和数据宽度对齐；CRC 校验计算；PWR 电源模式、停止/待机模式和唤醒源；RCC 时钟树、HSI/HSE、PLL、总线时钟使能；RTC 日历、闹钟和备份域基础操作。结合对应 stm32f1xx_hal_{gpio,exti,cortex,dma,crc,pwr,rcc,rtc}.h/.c 给出最小可用代码示例，并说明这些模块如何支撑上层外设初始化。讨论低功耗设计、中断优先级规划、时钟稳定性、复位行为与调试冻结等工程实践。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_gpio.h,Src/stm32f1xx_hal_gpio.c,Inc/stm32f1xx_hal_exti.h,Src/stm32f1xx_hal_exti.c,Inc/stm32f1xx_hal_cortex.h,Src/stm32f1xx_hal_cortex.c,Inc/stm32f1xx_hal_dma.h,Src/stm32f1xx_hal_dma.c,Inc/stm32f1xx_hal_crc.h,Src/stm32f1xx_hal_crc.c,Inc/stm32f1xx_hal_pwr.h,Src/stm32f1xx_hal_pwr.c,Inc/stm32f1xx_hal_rcc.h,Src/stm32f1xx_hal_rcc.c,Inc/stm32f1xx_hal_rtc.h,Src/stm32f1xx_hal_rtc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 7,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_gpio.h",
@@ -915,8 +915,8 @@
       "prompt": "创建 STM32F1xx LL RCC 与 RTC 低层接口的联合 API 文档。对于 LL_RCC，说明其直接管理 PLL、HSI/HSE、CSS、AHB/APB 分频、USB 预分频、系统时钟切换和外设时钟门控，文档化 __HAL_RCC_HSE_CONFIG、__HAL_RCC_PLL_CONFIG、__HAL_RCC_SYSCLK_CONFIG、__HAL_RCC_GET_SYSCLK_SOURCE、__HAL_RCC_APBx_CLK_ENABLE/DISABLE、__HAL_RCC_USB_CLK_DIV_CONFIG 等函数，解释 HSEState、PLLSource、PLLMul、PLLDiv、SYSCLKSource、AHBPrescaler、APBxPrescaler 等参数。对于 LL_RTC，说明其直接操作 CRH/CRL、DIVR/L、ALRM、TR/DR、CNTH/RTL、CALR 等寄存器，文档化 __HAL_RTC_ENABLE、__HAL_RTC_DISABLE、__HAL_RTC_WRITE_PROTECT/UNPROTECT、__HAL_RTC_HOURFORMAT_CONFIG、__HAL_RTC_TIME_CONFIG、__HAL_RTC_DATE_CONFIG、__HAL_RTC_ALARMA_CONFIG、__HAL_RTC_WAKECLOCK_CONFIG、__HAL_RTC_GET_FLAG/CLEAR_FLAG 等函数。提供 USB 48MHz 时钟配置和 RTC 秒中断的 LL 示例，并说明 LSI/LSE 启动等待、备份域保护、时钟源切换安全步骤。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_rcc.h,Src/stm32f1xx_ll_rcc.c,Inc/stm32f1xx_ll_rtc.h,Src/stm32f1xx_ll_rtc.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 8,
@@ -935,8 +935,8 @@
       "prompt": "为 STM32F1xx HAL 附带的 LL（Low Layer）低层驱动创建参考文档。解释 LL 接口直接封装寄存器操作的特点，说明其适用场景：极致性能、精确时序控制、裸机或轻量 RTOS 环境。对比 HAL 与 LL 在代码体积、执行效率、可移植性和易用性上的差异，并给出何时从 HAL 下探到 LL 的判断标准。按外设列出主要 LL 函数族（如 __HAL_RCC_xxx_FREQ_CONFIG、__HAL_GPIO_xxx、__HAL_I2C_xxx、__HAL_SPI_xxx、__HAL_TIM_xxx、__HAL_USART_xxx、__HAL_ADC_xxx、__HAL_DAC_xxx、__HAL_DMA_xxx、__HAL_RTC_xxx、__HAL_USB_xxx），说明常用参数、返回值和使用约束。提供从 HAL 迁移到 LL 的最小示例，并强调 LL 代码在不同 STM32F1 子型号间的可移植性风险。包含性能分析方法和调试建议。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_bus.h,Src/stm32f1xx_ll_bus.c,Inc/stm32f1xx_ll_gpio.h,Src/stm32f1xx_ll_gpio.c,Inc/stm32f1xx_ll_i2c.h,Src/stm32f1xx_ll_i2c.c,Inc/stm32f1xx_ll_spi.h,Src/stm32f1xx_ll_spi.c,Inc/stm32f1xx_ll_tim.h,Src/stm32f1xx_ll_tim.c,Inc/stm32f1xx_ll_usart.h,Src/stm32f1xx_ll_usart.c,Inc/stm32f1xx_ll_adc.h,Src/stm32f1xx_ll_adc.c,Inc/stm32f1xx_ll_dac.h,Src/stm32f1xx_ll_dac.c,Inc/stm32f1xx_ll_dma.h,Src/stm32f1xx_ll_dma.c,Inc/stm32f1xx_ll_rcc.h,Src/stm32f1xx_ll_rcc.c,Inc/stm32f1xx_ll_rtc.h,Src/stm32f1xx_ll_rtc.c,Inc/stm32f1xx_ll_usb.h,Src/stm32f1xx_ll_usb.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 8,
       "kk_dependent_files": [
         "Inc/stm32f1xx_ll_bus.h",
@@ -973,8 +973,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的配置与定制创建实用指南。详细说明如何基于 stm32f1xx_hal_conf_template.h 裁剪未使用的外设模块以减小固件体积，如何配置时钟源、振荡器频率、Tick 频率、调试选项和外设宏开关。解释 stm32f1xx_hal_msp_template.c 中 MSP（MCU Specific Peripheral）钩子的编写规范，包括 HAL_xxx_MspInit 与 HAL_xxx_MspDeInit 中时钟、GPIO、中断、DMA 的板级初始化顺序。说明 stm32_assert_template.h 中 ASSERT_PARAM 断言机制的启用方式、调试输出和发布构建关闭策略。提供自定义时基（SysTick 或 RTC）的实现要点，以及将 HAL 集成到 FreeRTOS、ThreadX 或其他 RTOS 的注意事项。包含常见配置错误、编译警告和运行时崩溃的定位方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_hal_conf_template.h,Src/stm32f1xx_hal_msp_template.c,Inc/stm32_assert_template.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 9,
       "kk_dependent_files": [
         "Inc/stm32f1xx_hal_conf_template.h",
@@ -990,8 +990,8 @@
       "prompt": "创建 STM32F1xx LL USB 及其他常用 LL 外设的参考文档。对于 LL_USB，说明其直接管理 USB 设备端 PCD 寄存器，包括 EPxR、ISTR、BTABLE、EP0R、DEVICE_ADDR、BADD、FNORD_0/1、ESR 等，文档化 __HAL_USB_ENABLE/DISABLE、__HAL_USB_RESET、__HAL_USB_CONNECT/UNCONNECT、__HAL_USB_EP_SETUP、__HAL_USB_EP_SET_TYPE、__HAL_USB_EP_SET_STALL/CLRTSTALL、__HAL_USB_EP_SET_TX_STATUS、__HAL_USB_EP_SET_RX_STATUS、__HAL_USB_GET_EP_TX_STATUS/RX_STATUS、__HAL_USB_GET_DEVICE_SPEED 等函数，并说明端点类型（Bulk/Control/Interrupt/ISOchronous）、缓冲区表、端点状态机与中断处理流程。对其他 LL 模块简要说明：LL_CRC 的 CRC_DR/CRC_POL/CRC_INIT 操作、LL_EXTI 的 IMR/EMR/RTSR/FTSR/GPR 配置、LL_PWR 的 PWR_CR_PDDS_CDS 低功耗模式、LL_SYSTEM 的 SysTick 配置和系统钩子。提供 USB CDC 虚拟串口端点初始化和 EXTI 外部中断配置的 LL 示例，并强调 LL_USB 通常需要配合 HAL PCD 或自定义 USB 协议栈使用。包含 USB 枚举问题、端点缓冲区溢出、中断丢失和低功耗唤醒的排查方法。",
       "progress_status": "completed",
       "dependent_files": "Inc/stm32f1xx_ll_usb.h,Src/stm32f1xx_ll_usb.c,Inc/stm32f1xx_ll_crc.h,Src/stm32f1xx_ll_crc.c,Inc/stm32f1xx_ll_exti.h,Src/stm32f1xx_ll_exti.c,Inc/stm32f1xx_ll_pwr.h,Src/stm32f1xx_ll_pwr.c,Inc/stm32f1xx_ll_system.h,Src/stm32f1xx_ll_system.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "parent_id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
       "layer_level": 1,
       "order": 9,
@@ -1016,8 +1016,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的向后兼容性创建专门文档。说明 Legacy 目录的作用：保留早期 STM32Cube HAL API 的兼容层，帮助从旧版 STM32CubeF1 项目平滑迁移。重点解释 stm32f1xx_hal_can_legacy.h、stm32f1xx_hal_can_ex_legacy.h 与 Src/Legacy/stm32f1xx_hal_can.c 如何桥接旧 CAN API 到新 HAL 实现。给出从 Legacy API 迁移到当前 stm32f1xx_hal_can.h 的对照表，包括命名变化、参数结构调整、回调签名变更和错误码映射。说明哪些 Legacy 接口仍受支持、哪些已被标记为废弃，以及未来版本可能的移除计划。提供自动化迁移建议和常见问题解决方案，确保存量代码在不破坏行为的前提下逐步现代化。",
       "progress_status": "completed",
       "dependent_files": "Inc/Legacy/stm32f1xx_hal_legacy.h,Inc/Legacy/stm32f1xx_hal_can_legacy.h,Inc/Legacy/stm32f1xx_hal_can_ex_legacy.h,Src/Legacy/stm32f1xx_hal_can.c",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 10,
       "kk_dependent_files": [
         "Inc/Legacy/stm32f1xx_hal_legacy.h",
@@ -1034,8 +1034,8 @@
       "prompt": "为 STM32F1xx HAL Driver 的开发者贡献创建指南。说明如何参与仓库的贡献流程，包括 Fork、分支命名、提交信息规范和 Pull Request 模板的使用。解释代码风格、注释约定、头文件组织和 C99/C++ 兼容要求。结合 CODE_OF_CONDUCT.md 与 SECURITY.md 说明社区行为准则和安全漏洞报告流程。提供本地验证建议：编译器版本、CMSIS Core/Device 依赖、静态检查和最小测试用例。说明如何为新外设或新功能添加 HAL/LL 接口、MSP 钩子、文档和向后兼容层。包含常见审查意见、回归测试和兼容性检查清单。",
       "progress_status": "completed",
       "dependent_files": "CONTRIBUTING.md,CODE_OF_CONDUCT.md,SECURITY.md",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 11,
       "kk_dependent_files": [
         "CONTRIBUTING.md",
@@ -1051,8 +1051,8 @@
       "prompt": "",
       "progress_status": "completed",
       "dependent_files": "CMSIS/Core/Include/core_cm3.h,CMSIS/Core/Include/cmsis_compiler.h,CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h,CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h,CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h,Inc/stm32f1xx_hal_conf.h",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z",
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z",
       "order": 12,
       "kk_dependent_files": [
         "CMSIS/Core/Include/core_cm3.h",
@@ -1074,8 +1074,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "1e76ead1-7274-4caf-b4aa-a5814188652a",
@@ -1086,8 +1086,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "40d86324-ea50-4a5b-a2b2-755c9c4dde63",
@@ -1098,8 +1098,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "71da0df3-7276-4fb8-a0a8-1ed8e202ca08",
@@ -1110,8 +1110,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "759d5027-752a-4da8-b6ec-49961157c711",
@@ -1122,8 +1122,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "7f64b854-b943-4b91-90aa-2e1b517e0e1a",
@@ -1134,8 +1134,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "a1dc4d90-940e-4f3e-94c3-a9f3ddd7463f",
@@ -1146,8 +1146,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "be2da6b5-a8bd-4eef-b762-fc5862d69db9",
@@ -1158,8 +1158,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "c4be9655-8f29-4bed-a688-da2f2f13a030",
@@ -1170,8 +1170,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "2d19a001-c697-49b7-ba3e-71a3f85cdbf1",
@@ -1182,8 +1182,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "40353b43-e438-4fa6-9a6e-3450bef1af6c",
@@ -1194,8 +1194,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "44915055-a6b0-49d2-840b-236d11f23b6b",
@@ -1206,8 +1206,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "512f5d76-74b2-4d30-be48-99a279a2ef86",
@@ -1218,8 +1218,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "645fb0ab-a8b6-4aa6-a919-f3caa41e3306",
@@ -1230,8 +1230,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "b045eafc-beed-4dfa-aa64-5a9dc95e1338",
@@ -1242,8 +1242,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "c27b73b1-393b-4e7e-92b6-4eee915f07ad",
@@ -1254,8 +1254,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "e82997be-6783-4bc9-b9c3-eeea353ebfc8",
@@ -1266,8 +1266,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "ed97000d-9348-4fbc-8190-cdfd703f8aa9",
@@ -1278,8 +1278,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "1c3603f8-5588-4b95-9fcc-435e58b9d043",
@@ -1290,8 +1290,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "2ea7ba59-f565-45f7-9b9a-350eb4da4861",
@@ -1302,8 +1302,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "3feeb712-5a49-4706-92bf-4c356ad63a3a",
@@ -1314,8 +1314,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "6d919f1f-b2de-47df-b924-66ec16a1b8f0",
@@ -1326,8 +1326,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "79cfd5de-220d-4602-80de-8e38eec0d06a",
@@ -1338,8 +1338,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "7b627eec-d5dd-420c-b27a-d7d57acc812b",
@@ -1350,8 +1350,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "b9286222-6cc6-4f02-ad6d-c67520646bee",
@@ -1362,8 +1362,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "dd3bf344-1964-4009-a53f-efb8b5cb84c3",
@@ -1374,8 +1374,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "1d949455-caa7-4554-9e0d-bf471f7f3f55",
@@ -1386,8 +1386,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "7a8950ef-a706-4494-bff3-45e640c0a1bb",
@@ -1398,8 +1398,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "af2130d4-175f-44e9-821a-cfbc4ccf36fa",
@@ -1410,8 +1410,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "b16ccaf6-ee1e-4fe2-8fc3-a4c400214100",
@@ -1422,8 +1422,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "f7d8de90-e6a4-4cdf-af27-280a6c02aa37",
@@ -1434,8 +1434,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "4e060a2c-d6ba-4240-a262-eb56e6ba5f21",
@@ -1446,8 +1446,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "a3d9a74e-ce5f-4c65-8d70-18626badd572",
@@ -1458,8 +1458,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "ea7c0984-85dc-4a91-b3fa-565b2a41c001",
@@ -1470,8 +1470,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "f5383849-063d-49f8-b019-d24b626401a0",
@@ -1482,8 +1482,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "0d2d1617-6010-4fcb-b306-32abe3522d47",
@@ -1494,8 +1494,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "a3aa394d-cac6-4400-90a7-d1f6a9e6579d",
@@ -1506,8 +1506,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "ac29f845-e213-4ab3-8a0b-13370a2d83f3",
@@ -1518,8 +1518,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "10dcd435-1062-4a06-8022-78add5f47b1a",
@@ -1530,8 +1530,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "1d0f7f04-2f81-42e5-a93f-61b8b90f2903",
@@ -1542,8 +1542,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "3aa5e914-cf58-4297-9712-af3ac25eed29",
@@ -1554,8 +1554,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "d715f2ee-7192-454d-8008-59a2d387d04c",
@@ -1566,8 +1566,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "e460944e-49a3-47bb-a327-e591ebabff7b",
@@ -1578,8 +1578,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "b328bf34-ddeb-4968-9fe0-2735003f82c8",
@@ -1590,8 +1590,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "ebec235e-b48d-4e76-9b7f-c5cf94ad254c",
@@ -1602,8 +1602,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "6170593e-c032-4315-9df9-ce7dd41fcbb8",
@@ -1614,8 +1614,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "67e73f60-3cae-4160-a4fc-8e6a8be7c7d5",
@@ -1626,8 +1626,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "4fa601af-1175-4a54-b2d7-94f6c97ff59f",
@@ -1638,8 +1638,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "dad1c77a-a66b-4845-a657-297d6c535c41",
@@ -1650,8 +1650,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": "4f9bed75-4a7f-46de-9808-eaa2f8db2adf",
@@ -1662,8 +1662,8 @@
       "progress_status": "completed",
       "repo_id": "add8d376-ad74-eaa2-6c0d-86e9d9dd0e82",
       "reference_count": 0,
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     }
   ],
   "knowledge_relations": [
@@ -1674,8 +1674,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 2,
@@ -1684,8 +1684,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 3,
@@ -1694,8 +1694,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 4,
@@ -1704,8 +1704,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 5,
@@ -1714,8 +1714,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 6,
@@ -1724,8 +1724,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 7,
@@ -1734,8 +1734,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 8,
@@ -1744,8 +1744,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 9,
@@ -1754,8 +1754,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 10,
@@ -1764,8 +1764,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 11,
@@ -1774,8 +1774,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 12,
@@ -1784,8 +1784,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 13,
@@ -1794,8 +1794,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 14,
@@ -1804,8 +1804,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 15,
@@ -1814,8 +1814,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 16,
@@ -1824,8 +1824,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 17,
@@ -1834,8 +1834,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 18,
@@ -1844,8 +1844,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 19,
@@ -1854,8 +1854,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 20,
@@ -1864,8 +1864,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 21,
@@ -1874,8 +1874,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 22,
@@ -1884,8 +1884,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 23,
@@ -1894,8 +1894,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 24,
@@ -1904,8 +1904,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 25,
@@ -1914,8 +1914,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 26,
@@ -1924,8 +1924,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 27,
@@ -1934,8 +1934,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 28,
@@ -1944,8 +1944,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 29,
@@ -1954,8 +1954,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 30,
@@ -1964,8 +1964,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 31,
@@ -1974,8 +1974,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 32,
@@ -1984,8 +1984,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 33,
@@ -1994,8 +1994,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 34,
@@ -2004,8 +2004,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 35,
@@ -2014,8 +2014,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 36,
@@ -2024,8 +2024,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     },
     {
       "id": 37,
@@ -2034,8 +2034,8 @@
       "source_type": "WIKI_ITEM",
       "target_type": "WIKI_ITEM",
       "relationship_type": "PARENT_CHILD",
-      "gmt_create": "2026-11-23T08:58:22Z",
-      "gmt_modified": "2026-11-23T08:58:22Z"
+      "gmt_create": "2026-11-23T09:56:32Z",
+      "gmt_modified": "2026-11-23T09:56:32Z"
     }
   ]
 }

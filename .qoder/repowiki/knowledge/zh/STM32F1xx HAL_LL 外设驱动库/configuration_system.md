@@ -1,6 +1,8 @@
 ## 概述
 
-本仓库是 STMicroelectronics STM32CubeF1 包，为 F100/F101/F102/F103 xx6/xb/xe/xg/xc（含 xxx5c/xxx7c）MCU 提供完整的 CMSIS Core 与 Device 基础设施，以及对应的 HAL/LL C 驱动。配置入口仍然是 **纯 C 预处理器宏**（无 YAML/TOML/env/properties 等运行时加载机制），但在本次增量更新中，仓库从“仅包含 HAL/LL 代码”升级为同时携带 CMSIS Core/Device 完整实现。
+本仓库是 STMicroelectronics STM32CubeF1 包，为 F100/F101/F102/F103 xx6/xb/xe/xg（含 xxx5c/xxx7c）MCU 提供完整的 CMSIS Core 与 Device 基础设施，以及对应的 HAL/LL C 驱动。配置入口仍然是 **纯 C 预处理器宏**（无 YAML/TOML/env/properties 等运行时加载机制），并在本增量中继续携带 CMSIS Core/Device 完整实现。
+
+仓库根目录不存在 `config/`、`.yaml`、`.toml`、`.env*`、`application.properties` 等运行时配置文件；仅在 `.qoder` 知识库索引中使用了两份 `.yaml`（`_module.yaml`、`_index.yaml`），属于元数据仓库索引，不参与构建与运行时的配置系统。
 
 ## 核心机制
 
