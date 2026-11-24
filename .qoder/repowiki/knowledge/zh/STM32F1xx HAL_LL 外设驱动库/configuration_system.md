@@ -1,6 +1,6 @@
 ## 概述
 
-本仓库是 STMicroelectronics STM32CubeF1 包，为 F100/F101/F102/F103 xx6/xb/xe/xg（含 xxx5c/xxx7c）MCU 提供完整的 CMSIS Core 与 Device 基础设施，以及对应的 HAL/LL C 驱动。配置入口仍然是 **纯 C 预处理器宏**（无 YAML/TOML/env/properties 等运行时加载机制），并在本增量中继续携带 CMSIS Core/Device 完整实现。
+本仓库是 STMicroelectronics STM32CubeF1 包，为 F100/F101/F102/F103 xx6/xb/xe/xg（含 xxx5c/xxx7c）MCU 提供完整的 CMSIS Core 与 Device 基础设施，以及对应的 HAL/LL C 驱动。配置入口仍然是 **纯 C 预处理器宏**（无 YAML/TOML/env/properties 等运行时加载机制），并继续携带 CMSIS Core/Device 完整实现。
 
 仓库根目录不存在 `config/`、`.yaml`、`.toml`、`.env*`、`application.properties` 等运行时配置文件；仅在 `.qoder` 知识库索引中使用了两份 `.yaml`（`_module.yaml`、`_index.yaml`），属于元数据仓库索引，不参与构建与运行时的配置系统。
 
@@ -12,7 +12,7 @@
 - 顶部注释明确声明："This file should be copied to the application folder and renamed to stm32f1xx_hal_conf.h"
 - 作为用户定制的起点，模块默认全部注释禁用（`/* #define HAL_<X>_MODULE_ENABLED */`），供应用按需启用
 
-#### `Inc/stm32f1xx_hal_conf.h`（新增——包内预设默认值）
+#### `Inc/stm32f1xx_hal_conf.h`（包内预设默认值）
 - 所有外设的 `HAL_MODULE_ENABLED` / `HAL_<X>_MODULE_ENABLED` **全部启用**（ADC、CAN、CEC、CORTEX、CRC、DAC、DMA、ETH、EXTI、FLASH、GPIO、HCD、I2C、I2S、IRDA、IWDG、NAND、NOR、PCCARD、PCD、PWR、RCC、RTC、SD、SMARTCARD、SPI、SRAM、TIM、UART、USART、WWDG、MMC）
 - 所有 `USE_HAL_<X>_REGISTER_CALLBACKS` **默认开启**（不再默认为 `0U`），允许调用方注册回调
 - 振荡器、系统参数、断言开关、以太网 PHY 等区块结构与模板一致，但处于可用状态
@@ -51,7 +51,7 @@
 | IAR 适配 | `cmsis_iar.h` | IAR EWARM 对应属性映射 |
 | MPU | `mpu_armv7.h` | Cortex-M7/M3 MPU 抽象（M3 下为空壳） |
 
-`stm32f1xx_hal_def.h` 中的 `#if defined(__ICCARM__)` / `__GNUC__` / `__CC_ARM` / `__ARMCC_VERSION` / `__clang__` 分支选择编译器头，确保 `__weak`、`__packed`、`__RAM_FUNC`、`__NOINLINE` 在所有支持的工具链上一致。
+`stm32f1xx_hal_def.h` 中的 `#if defined(__ICCARM__)` / `__GNUC__` / `__CC_ARM__` / `__ARMCC_VERSION` / `__clang__` 分支选择编译器头，确保 `__weak`、`__packed`、`__RAM_FUNC`、`__NOINLINE` 在所有支持的工具链上一致。
 
 ### 5. 包含顺序与依赖拓扑
 

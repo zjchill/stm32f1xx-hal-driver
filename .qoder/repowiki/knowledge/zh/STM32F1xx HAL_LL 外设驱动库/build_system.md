@@ -28,7 +28,7 @@ HAL 通过 `Inc/stm32f1xx_hal_conf.h` 选择具体模块，LL 通过对应 `stm3
 
 - README.md 强制三件套一致性：`HAL Driver F1 : CMSIS Device F1 : CMSIS Core`。
 - 当前发行 v1.1.8 对应的配套关系在 README 表格中明确列出（CMSIS-Device v4.3.x、CMSIS-Core v5.4.0_cm3）；版本号以 Git Tag `v1.1.x` 体现，并通过 GitHub Releases badge 展示。
-- 将 CMSIS Core/Device 以内联头文件随仓库分发，以避免上游上游版本漂移导致的 ABI/符号不匹配。
+- 将 CMSIS Core/Device 以内联头文件随仓库分发，以避免上游漂移导致的 ABI/符号不匹配。
 
 ## 外部集成步骤（由文档规定的构建方式）
 

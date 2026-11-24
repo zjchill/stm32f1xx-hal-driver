@@ -39,8 +39,12 @@ kk_cards:
         title: STM32CubeF1 配置体系：编译期宏、CMSIS Core/Device 头与 HAL 模板
     error_handling:
         id: 7d7dafa2-da8c-4a69-a5a9-f565c2fa1746
-        title: STM32CubeF1 错误处理：HAL_StatusTypeDef + assert_param（含 CMSIS Core/Device 层弱符号中断向量）
+        title: STM32CubeF1 错误处理：HAL_StatusTypeDef + assert_param（弱符号异常钩子依赖外部 Core）
+    logging_system:
+        id: 707c8c14-6803-4c46-a932-1a2300f4c946
+        title: STM32Cube HAL 调试断言与极简输出
 kk_repo_cards:
     - build_system
     - configuration_system
     - error_handling
+    - logging_system
